@@ -312,7 +312,7 @@ export default function ContactSection() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 self-start">
+        <div className="flex flex-col gap-5 self-start lg:pt-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

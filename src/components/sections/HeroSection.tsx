@@ -65,8 +65,9 @@ export default function HeroSection() {
       <div className="container-shell relative z-10 grid gap-12 pb-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-center">
         <motion.div
           variants={staggerContainer}
-          initial={false}
-          animate="visible"
+          initial={shouldReduceMotion ? false : "hidden"}
+          whileInView={shouldReduceMotion ? undefined : "visible"}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-[40rem]"
         >
           <motion.div
@@ -167,8 +168,9 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          initial={false}
-          animate={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: 30 }}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
           className="justify-self-end"
         >
