@@ -1,9 +1,11 @@
-import { BriefcaseBusiness, CodeXml, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
+import Tooltip from "@/components/common/Tooltip";
 import { navigationItems, personal } from "@/data/personal";
 
 const iconMap = {
-  GitHub: CodeXml,
-  LinkedIn: BriefcaseBusiness,
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
   Email: Mail,
 };
 
@@ -27,7 +29,11 @@ export default function Footer() {
             {navigationItems
               .filter((item) => item.id !== "hero")
               .map((item) => (
-                <a key={item.id} href={`/#${item.id}`} className="hover:text-white">
+                <a
+                  key={item.id}
+                  href={`/#${item.id}`}
+                  className="cursor-pointer hover:text-white"
+                >
                   {item.label}
                 </a>
               ))}
@@ -42,16 +48,17 @@ export default function Footer() {
               const Icon = iconMap[item.label as keyof typeof iconMap];
 
               return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={item.label}
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-white/20 hover:text-white"
-                >
-                  <Icon className="size-4" />
-                </a>
+                <Tooltip key={item.label} label={item.label}>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    aria-label={item.label}
+                    className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-white/20 hover:text-white"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                </Tooltip>
               );
             })}
           </div>

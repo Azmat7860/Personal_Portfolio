@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       "Building analytics SaaS, role-based enterprise applications, and secure full-stack systems with React, Next.js, TypeScript, and OpenAI integrations.",
     type: "website",
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({

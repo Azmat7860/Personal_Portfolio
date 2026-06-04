@@ -1,62 +1,57 @@
 "use client";
 
 import {
-  BriefcaseBusiness,
   Check,
   CheckCircle2,
   CircleAlert,
-  CodeXml,
   Copy,
+  ExternalLink,
   Mail,
   Phone,
   SendHorizontal,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import NoiseSurface from "@/components/common/NoiseSurface";
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
 import SectionWrapper from "@/components/common/SectionWrapper";
+import Tooltip from "@/components/common/Tooltip";
 import { personal } from "@/data/personal";
 
-const contactCards = [
+const contactLinks = [
   {
     label: "Email",
     value: personal.email,
-    action: "Click to copy",
-    icon: Mail,
     href: `mailto:${personal.email}`,
+    icon: Mail,
+    type: "copy",
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/azmat-ullah-khan-289439237",
-    action: "Open →",
-    icon: BriefcaseBusiness,
     href: personal.linkedin,
+    icon: LinkedInIcon,
+    type: "external",
   },
   {
     label: "GitHub",
     value: "github.com/Azmat7860",
-    action: "Open →",
-    icon: CodeXml,
     href: personal.github,
+    icon: GitHubIcon,
+    type: "external",
   },
   {
     label: "Phone",
     value: personal.phone,
-    action: "Call →",
-    icon: Phone,
     href: `tel:${personal.phone}`,
-  },
-];
-
-const responseHighlights = [
-  {
-    title: "Fast Response",
-    text: "I usually reply within 24 hours for serious project and hiring conversations.",
-  },
-  {
-    title: "Best Fit",
-    text: "Great match for product teams building AI SaaS, dashboards, admin panels, and scalable APIs.",
+    icon: Phone,
+    type: "phone",
   },
 ];
 
@@ -73,6 +68,29 @@ type ToastState = {
   type: "error" | "success";
 };
 
+function RequiredLabel({
+  children,
+  htmlFor,
+}: {
+  children: string;
+  htmlFor: string;
+}) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className="mb-2 flex items-center gap-2 text-sm text-[var(--text-secondary)]"
+    >
+      <span>{children}</span>
+      <span
+        className="rounded-full border border-[rgba(0,212,255,0.22)] bg-[rgba(0,212,255,0.08)] px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-[0.12em] text-[var(--accent-cyan)]"
+        aria-hidden="true"
+      >
+        Required
+      </span>
+    </label>
+  );
+}
+
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState(initialFormState);
@@ -80,6 +98,7 @@ export default function ContactSection() {
   const [toast, setToast] = useState<ToastState | null>(null);
   const statusTimerRef = useRef<number | null>(null);
   const toastTimerRef = useRef<number | null>(null);
+  const isSending = status === "loading";
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
   const isFormValid =
     Boolean(form.name.trim()) &&
@@ -120,7 +139,7 @@ export default function ContactSection() {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
-    if (status !== "loading") {
+    if (!isSending) {
       setStatus("idle");
     }
     setForm((current) => ({ ...current, [name]: value }));
@@ -162,7 +181,6 @@ export default function ContactSection() {
         confirmationSent?: boolean;
         error?: string;
         success?: boolean;
-        warning?: string;
       };
 
       if (!response.ok || !data.success) {
@@ -179,10 +197,8 @@ export default function ContactSection() {
       setForm(initialFormState);
       resetStatusAfterSuccess();
       showToast({
-        text:
-          data.warning ??
-          "Your message was received and a confirmation email has been sent.",
-        title: data.confirmationSent === false ? "Message received" : "Message sent",
+        text: "Your message was received and a confirmation email has been sent.",
+        title: "Message sent",
         type: "success",
       });
     } catch {
@@ -197,17 +213,16 @@ export default function ContactSection() {
 
   return (
     <SectionWrapper id="contact" className="overflow-hidden">
-      <NoiseSurface className="opacity-[0.03]" />
       <AnimatePresence>
         {toast ? (
           <motion.div
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            className={`fixed left-4 right-4 top-4 z-[200] mx-auto flex w-[min(92vw,28rem)] gap-3 rounded-2xl border p-4 shadow-2xl backdrop-blur-xl ${
+            initial={{ opacity: 0, x: 22 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 22 }}
+            className={`fixed right-4 top-4 z-[200] flex w-[min(92vw,27rem)] gap-3 rounded-xl border p-4 shadow-2xl backdrop-blur-xl transition-all duration-150 ${
               toast.type === "success"
-                ? "border-emerald-400/30 bg-emerald-950/80"
-                : "border-red-400/30 bg-red-950/80"
+                ? "border-emerald-400/30 bg-emerald-950/85"
+                : "border-red-400/30 bg-red-950/85"
             }`}
             role="status"
           >
@@ -226,215 +241,193 @@ export default function ContactSection() {
               <p className="font-medium text-white">{toast.title}</p>
               <p className="mt-1 text-sm leading-6 text-white/75">{toast.text}</p>
             </div>
-            <button
-              type="button"
-              aria-label="Dismiss notification"
-              onClick={() => setToast(null)}
-              className="self-start text-white/60 hover:text-white"
-            >
-              <X className="size-4" />
-            </button>
+            <Tooltip label="Dismiss notification">
+              <button
+                type="button"
+                aria-label="Dismiss notification"
+                onClick={() => setToast(null)}
+                className="self-start text-white/60 transition-colors duration-150 hover:text-white"
+              >
+                <X className="size-4" />
+              </button>
+            </Tooltip>
           </motion.div>
         ) : null}
       </AnimatePresence>
-      <div className="absolute inset-x-0 bottom-0 mx-auto h-[28rem] w-[70rem] max-w-full rounded-full bg-[radial-gradient(circle,rgba(0,210,255,0.08),rgba(139,92,246,0.06),transparent_70%)] blur-3xl" />
-      <div className="container-shell relative z-10 grid gap-8 lg:items-start lg:grid-cols-[1.02fr_0.98fr]">
-        <div>
+
+      <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div className="max-w-2xl">
           <p className="section-kicker">Contact</p>
-          <h2 className="section-heading">
+          <h2 className="font-[family-name:var(--font-outfit)] text-4xl font-bold leading-tight tracking-normal text-white md:text-5xl">
             Let&apos;s Build Something
           </h2>
-          <p className="mt-4 max-w-2xl text-lg text-[var(--text-secondary)]">
+          <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-secondary)] md:text-lg">
             Open for full-time roles, contract work, and remote product opportunities.
           </p>
 
-          <div className="mt-8 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-6">
-            <h3 className="text-base font-semibold text-white">Currently available for:</h3>
-            <ul className="mt-4 space-y-3 text-[var(--text-secondary)]">
-              {personal.currentlyAvailableFor.map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <Check className="size-4 text-[var(--accent-cyan)]" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="mt-8 rounded-xl border border-white/8 bg-white/[0.025] p-3">
+            {contactLinks.map((item) => {
+              const Icon = item.icon;
+              const isEmail = item.type === "copy";
+              const isExternal = item.type === "external";
+              const isLinked = isExternal || item.type === "phone";
+              const actionTooltip = isExternal
+                ? `Open ${item.label}`
+                : item.type === "phone"
+                  ? `Call ${item.value}`
+                  : "";
+              const rowContent = (
+                <>
+                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-[rgba(0,212,255,0.08)] text-[var(--accent-cyan)]">
+                    <Icon className="size-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                      {item.label}
+                    </span>
+                    <span className="mt-1 block truncate text-sm text-[var(--text-secondary)] transition-colors duration-150 group-hover:text-white md:text-base">
+                      {item.value}
+                    </span>
+                  </span>
+                </>
+              );
 
-          <div className="mt-5 space-y-4">
-            {contactCards.map((card) => {
-              const Icon = card.icon;
-              const isEmail = card.label === "Email";
-              const isExternal = card.href.startsWith("http");
+              if (isLinked) {
+                return (
+                  <Tooltip key={item.label} label={actionTooltip} side="bottom" className="w-full">
+                    <a
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="group flex w-full cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-white/[0.04]"
+                    >
+                      {rowContent}
+                      {isExternal ? (
+                        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 text-[var(--text-secondary)] transition-all duration-150 group-hover:border-[var(--border-accent)] group-hover:text-[var(--accent-cyan)]">
+                          <ExternalLink className="size-4" />
+                        </span>
+                      ) : null}
+                    </a>
+                  </Tooltip>
+                );
+              }
 
               return (
-                <motion.div
-                  key={card.label}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.35 }}
-                  whileHover={{ y: -5 }}
-                  className="surface-panel rounded-[1.5rem] border border-white/8 p-5"
+                <div
+                  key={item.label}
+                  className="group flex items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-white/[0.04]"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="inline-flex size-11 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
-                        <Icon className="size-5" />
-                      </div>
-                      <p className="mt-4 font-[family-name:var(--font-outfit)] text-xl font-semibold">
-                        {card.label}
-                      </p>
-                      <p className="mt-1 text-[var(--text-secondary)]">{card.value}</p>
-                    </div>
-                    {isEmail ? (
+                  {rowContent}
+                  {isEmail ? (
+                    <Tooltip label={copied ? "Copied" : "Copy email"} side="bottom">
                       <button
                         type="button"
                         onClick={handleCopy}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-white"
+                        className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-white"
+                        aria-label="Copy email address"
                       >
                         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-                        {copied ? "Copied!" : card.action}
                       </button>
-                    ) : (
-                      <a
-                        href={card.href}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-white"
-                      >
-                        {card.action}
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
+                    </Tooltip>
+                  ) : null}
+                </div>
               );
             })}
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 self-start lg:pt-28">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.45 }}
-            className="surface-panel order-2 rounded-[1.5rem] border border-white/8 p-5"
-          >
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="name" className="mb-2 block text-sm text-[var(--text-secondary)]">
-                  Full Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  required
-                  value={form.name}
-                  onChange={handleFieldChange}
-                  placeholder="Your full name"
-                  className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] px-4 py-3 text-white outline-none focus:border-[var(--border-accent)]"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block text-sm text-[var(--text-secondary)]">
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleFieldChange}
-                  placeholder="you@example.com"
-                  className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] px-4 py-3 text-white outline-none focus:border-[var(--border-accent)]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="mb-2 block text-sm text-[var(--text-secondary)]"
-                >
-                  Subject
-                </label>
-                <input
-                  id="subject"
-                  name="subject"
-                  required
-                  value={form.subject}
-                  onChange={handleFieldChange}
-                  placeholder="Project, role, or inquiry subject"
-                  className="w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] px-4 py-3 text-white outline-none focus:border-[var(--border-accent)]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block text-sm text-[var(--text-secondary)]"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={4}
-                  value={form.message}
-                  onChange={handleFieldChange}
-                  placeholder="Tell me what you would like to build or discuss..."
-                  className="thin-scrollbar w-full rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] px-4 py-3 text-white outline-none focus:border-[var(--border-accent)]"
-                />
-              </div>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.35 }}
+          className="rounded-xl border border-white/10 bg-[#0d0d18] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.28)] md:p-6"
+        >
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <RequiredLabel htmlFor="name">Full Name</RequiredLabel>
+              <input
+                id="name"
+                name="name"
+                required
+                disabled={isSending}
+                value={form.name}
+                onChange={handleFieldChange}
+                placeholder="Your full name"
+                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </div>
+            <div>
+              <RequiredLabel htmlFor="email">Email Address</RequiredLabel>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                disabled={isSending}
+                value={form.email}
+                onChange={handleFieldChange}
+                placeholder="you@example.com"
+                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="subject"
+                className="mb-2 block text-sm text-[var(--text-secondary)]"
+              >
+                Subject
+              </label>
+              <input
+                id="subject"
+                name="subject"
+                required
+                disabled={isSending}
+                value={form.subject}
+                onChange={handleFieldChange}
+                placeholder="Project, role, or inquiry subject"
+                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </div>
+            <div>
+              <RequiredLabel htmlFor="message">Message</RequiredLabel>
+              <textarea
+                id="message"
+                name="message"
+                required
+                disabled={isSending}
+                rows={4}
+                value={form.message}
+                onChange={handleFieldChange}
+                placeholder="Tell me what you would like to build or discuss..."
+                className="thin-scrollbar w-full resize-none rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </div>
 
+            <Tooltip
+              className="w-full"
+              label={
+                isSending
+                  ? "Sending your message"
+                  : isFormValid
+                    ? "Send your message"
+                    : "Complete all required fields"
+              }
+            >
               <button
                 type="submit"
-                disabled={status === "loading" || !isFormValid}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 font-medium text-black disabled:opacity-50"
+                disabled={isSending || !isFormValid}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 font-medium text-black shadow-[0_0_28px_rgba(0,212,255,0.14)] transition-all duration-150 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
                 style={{
-                  background:
-                    status === "success" ? "#10B981" : "var(--gradient-accent)",
+                  background: status === "success" ? "#10B981" : "var(--gradient-accent)",
                 }}
               >
-                {status === "loading" ? "Sending..." : status === "success" ? "Message Sent ✓" : "Send Message"}
+                {isSending ? "Sending..." : status === "success" ? "Message Sent" : "Send Message"}
                 <SendHorizontal className="size-4" />
               </button>
-            </form>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: 0.05 }}
-            className="surface-panel order-1 rounded-[2rem] border border-white/8 p-5 md:p-6"
-          >
-            <p className="font-[family-name:var(--font-outfit)] text-xl font-semibold text-white">
-              Why Reach Out
-            </p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {responseHighlights.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-4"
-                >
-                  <p className="font-medium text-white">{item.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
-                    {item.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-5 rounded-[1.35rem] border border-[var(--border-accent)] bg-[rgba(0,210,255,0.05)] p-4">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-[var(--text-code)]">
-                Preferred work
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
-                Full-time engineering roles, contract product builds, analytics dashboards,
-                AI-enabled workflows, and backend systems with strong role-based architecture.
-              </p>
-            </div>
-          </motion.div>
-        </div>
+            </Tooltip>
+          </form>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

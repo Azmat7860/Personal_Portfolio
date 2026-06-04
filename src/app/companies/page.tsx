@@ -54,7 +54,7 @@ export default function CompaniesPage() {
                     href={item.companyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white hover:border-[var(--border-accent)]"
+                    className="inline-flex cursor-pointer rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white hover:border-[var(--border-accent)]"
                   >
                     Visit company
                   </a>

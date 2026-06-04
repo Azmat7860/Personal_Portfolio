@@ -4,22 +4,22 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowDown,
   ArrowRight,
-  BriefcaseBusiness,
-  CodeXml,
   Download,
   Mail,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
 import GradientText from "@/components/common/GradientText";
 import NoiseSurface from "@/components/common/NoiseSurface";
 import StackVisualization from "@/components/common/StackVisualization";
+import Tooltip from "@/components/common/Tooltip";
 import { personal } from "@/data/personal";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const socialIcons = [
-  { label: "GitHub", href: personal.github, icon: CodeXml },
-  { label: "LinkedIn", href: personal.linkedin, icon: BriefcaseBusiness },
+  { label: "GitHub", href: personal.github, icon: GitHubIcon },
+  { label: "LinkedIn", href: personal.linkedin, icon: LinkedInIcon },
   { label: "Email", href: `mailto:${personal.email}`, icon: Mail },
 ];
 
@@ -138,7 +138,7 @@ export default function HeroSection() {
               <ArrowRight className="size-4" />
             </Link>
             <a
-              href="/Azmat_Khan_Resume_Updated.pdf"
+              href="/Azmat_Ullah_Khan_Resume.pdf"
               download
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-default)] bg-white/[0.02] px-6 py-3 text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-hover)] hover:bg-white/[0.04]"
             >
@@ -152,16 +152,17 @@ export default function HeroSection() {
               const Icon = item.icon;
 
               return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={item.label}
-                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-[var(--border-accent)] hover:text-white"
-                >
-                  <Icon className="size-4" />
-                </a>
+                <Tooltip key={item.label} label={item.label}>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    aria-label={item.label}
+                    className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-[var(--border-accent)] hover:text-white"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                </Tooltip>
               );
             })}
           </motion.div>

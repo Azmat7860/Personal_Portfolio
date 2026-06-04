@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import type SMTPPool from "nodemailer/lib/smtp-pool";
 import { renderContactConfirmationEmail } from "@/lib/email/contactConfirmationTemplate";
 import { renderPortfolioInquiryEmail } from "@/lib/email/portfolioInquiryTemplate";
 import type { ContactEmailPayload } from "@/lib/email/types";
@@ -22,6 +23,8 @@ type ContactRequestBody = {
   name?: unknown;
   subject?: unknown;
 };
+
+let cachedTransporter: nodemailer.Transporter<SMTPPool.SentMessageInfo> | null = null;
 
 function cleanField(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -89,14 +92,20 @@ export async function POST(request: Request) {
   };
 
   try {
-    const transporter = nodemailer.createTransport({
+    cachedTransporter ??= nodemailer.createTransport({
       auth: {
         pass: emailConfig.smtpPass,
         user: emailConfig.smtpUser,
       },
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
       host: emailConfig.smtpHost,
+      maxConnections: 2,
+      maxMessages: 50,
+      pool: true,
       port: emailConfig.smtpPort,
       secure: emailConfig.smtpSecure,
+      socketTimeout: 20_000,
     });
 
     const payload: ContactEmailPayload = {
@@ -111,14 +120,14 @@ export async function POST(request: Request) {
     };
 
     const [adminResult, confirmationResult] = await Promise.allSettled([
-      transporter.sendMail({
+      cachedTransporter.sendMail({
         from: emailConfig.fromEmail,
         html: renderPortfolioInquiryEmail(payload),
         replyTo: email,
         subject: `Portfolio inquiry: ${subject}`,
         to: emailConfig.contactEmail,
       }),
-      transporter.sendMail({
+      cachedTransporter.sendMail({
         from: emailConfig.fromEmail,
         html: renderContactConfirmationEmail(payload),
         replyTo: emailConfig.contactEmail,

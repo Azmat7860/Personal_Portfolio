@@ -34,9 +34,6 @@ export default function ProjectsSection() {
             <p className="section-kicker">Projects</p>
             <h2 className="section-heading">Resume-Aligned Product Work</h2>
           </div>
-          <div className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 font-mono text-sm text-[var(--text-secondary)]">
-            [ {projects.length} Key Projects ]
-          </div>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -116,7 +113,7 @@ export default function ProjectsSection() {
                           <a
                             key={key}
                             href={href}
-                            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[var(--text-primary)] hover:border-white/20"
+                            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[var(--text-primary)] hover:border-white/20"
                           >
                             {key === "live"
                               ? "Live Demo"

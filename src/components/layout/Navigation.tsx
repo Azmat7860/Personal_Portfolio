@@ -1,11 +1,19 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Mail, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
+import Tooltip from "@/components/common/Tooltip";
 import { navigationItems, personal, socialLinks } from "@/data/personal";
 import { cn } from "@/lib/utils";
+
+const socialIconMap = {
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
+  Email: Mail,
+};
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -198,19 +206,30 @@ export default function Navigation() {
                     Connect
                   </p>
                   <div className="flex flex-wrap gap-3 text-sm text-[var(--text-secondary)]">
-                    {socialLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={
-                          link.href.startsWith("http") ? "noopener noreferrer" : undefined
-                        }
-                        className="rounded-full border border-white/10 px-4 py-2 hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
+                    {socialLinks.map((link) => {
+                      const Icon = socialIconMap[link.label as keyof typeof socialIconMap];
+
+                      return (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target={link.href.startsWith("http") ? "_blank" : undefined}
+                          rel={
+                            link.href.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 px-4 py-2 hover:border-[var(--border-accent)] hover:text-white"
+                        >
+                          {Icon ? (
+                            <Tooltip label={link.label}>
+                              <Icon className="size-4" />
+                            </Tooltip>
+                          ) : null}
+                          {link.label}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

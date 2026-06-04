@@ -9,8 +9,8 @@ import { personal } from "@/data/personal";
 const stats = [
   { value: "3+", label: "Years Experience" },
   { value: "4", label: "Companies" },
-  { value: "BS", label: "CS Degree" },
-  { value: "4", label: "Key Projects" },
+  { value: "BSCS", label: "Degree" },
+  { value: "4", label: "Projects" },
 ];
 
 export default function AboutSection() {
