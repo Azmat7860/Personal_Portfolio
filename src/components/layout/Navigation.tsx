@@ -1,0 +1,223 @@
+"use client";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { navigationItems, personal, socialLinks } from "@/data/personal";
+import { cn } from "@/lib/utils";
+
+export default function Navigation() {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const marker = window.scrollY + 180;
+      let current = navigationItems[0]?.id ?? "hero";
+
+      navigationItems.forEach((item) => {
+        const section = document.getElementById(item.id);
+        if (section && marker >= section.offsetTop) {
+          current = item.id;
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const scrollToSection = (id: string) => {
+    if (pathname !== "/") {
+      window.location.href = id === "hero" ? "/" : `/#${id}`;
+      setMenuOpen(false);
+      return;
+    }
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    if (window.__lenis) {
+      window.__lenis.scrollTo(target, { offset: -24, duration: 1 });
+    } else {
+      window.scrollTo({
+        top: target.offsetTop - 24,
+        behavior: "smooth",
+      });
+    }
+
+    setMenuOpen(false);
+  };
+
+  return (
+    <>
+      <nav
+        className={cn(
+          "fixed inset-x-0 top-0 z-[100] transition-all duration-300",
+          scrolled
+            ? "border-b border-white/8 bg-[rgba(4,4,10,0.82)] backdrop-blur-xl"
+            : "bg-transparent",
+        )}
+      >
+        <div className="container-shell flex h-18 items-center justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => scrollToSection("hero")}
+            className="group relative flex items-center gap-3"
+            aria-label="Go to home section"
+          >
+            <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
+              <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[rgba(4,4,10,0.92)]" />
+              <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-white">
+                A
+                <span className="-ml-1 accent-text">K</span>
+              </span>
+            </span>
+            <span className="hidden flex-col text-left md:flex">
+              <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-white">
+                Azmat Ullah Khan
+              </span>
+              <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-muted)]">
+                Full Stack Developer
+              </span>
+            </span>
+          </button>
+
+          <div className="hidden items-center gap-8 rounded-full border border-white/8 bg-white/[0.02] px-5 py-3 lg:flex">
+            {navigationItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => scrollToSection(item.id)}
+                className={cn(
+                  "group relative text-sm font-medium transition-colors",
+                  activeSection === item.id
+                    ? "text-[var(--text-primary)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
+                )}
+              >
+                {item.label}
+                <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
+                {activeSection === item.id ? (
+                  <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
+                ) : null}
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <div className="rounded-full border border-[var(--border-default)] bg-white/[0.02] px-4 py-2 text-xs text-[var(--text-secondary)] shadow-[var(--shadow-glow)]">
+              <span className="mr-2 inline-block size-2 rounded-full bg-[var(--accent-emerald)]" />
+              Available
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-primary)] lg:hidden"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="size-5" />
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            className="fixed inset-0 z-[120] bg-[var(--bg-primary)] px-6 py-8 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="mx-auto flex h-full max-w-lg flex-col">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-[family-name:var(--font-outfit)] text-2xl font-semibold">
+                    {personal.name}
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                    {personal.role}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+                  aria-label="Close navigation menu"
+                >
+                  <X className="size-5" />
+                </button>
+              </div>
+
+              <div className="mt-16 flex flex-1 flex-col justify-between">
+                <div className="space-y-5">
+                  {navigationItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      type="button"
+                      onClick={() => scrollToSection(item.id)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.08 }}
+                      className="block font-[family-name:var(--font-outfit)] text-[2rem] font-semibold tracking-[-0.04em] text-left"
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </div>
+
+                <div className="border-t border-white/8 pt-8">
+                  <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--text-muted)]">
+                    Connect
+                  </p>
+                  <div className="flex flex-wrap gap-3 text-sm text-[var(--text-secondary)]">
+                    {socialLinks.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={
+                          link.href.startsWith("http") ? "noopener noreferrer" : undefined
+                        }
+                        className="rounded-full border border-white/10 px-4 py-2 hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
