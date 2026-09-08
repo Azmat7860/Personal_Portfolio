@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Briefcase, CalendarDays } from "lucide-react";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import TechBadge from "@/components/common/TechBadge";
 import { experience } from "@/data/experience";
@@ -41,13 +42,19 @@ export default function ExperienceSection() {
                   whileHover={{ y: -6 }}
                   className="surface-panel ml-10 rounded-[1.75rem] border border-white/8 p-6 md:ml-0"
                 >
-                  <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold">
-                    {item.company}
-                  </h3>
-                  <p className="mt-1 text-[var(--accent-cyan)]">{item.role}</p>
-                  <p className="mt-1 font-mono text-sm text-[var(--text-secondary)]">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex size-8 items-center justify-center rounded-xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
+                      <Briefcase className="size-3.5" />
+                    </span>
+                    <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold">
+                      {item.company}
+                    </h3>
+                  </div>
+                  <p className="mt-2 text-[var(--accent-cyan)]">{item.role}</p>
+                  <p className="mt-1 inline-flex items-center gap-2 font-mono text-sm text-[var(--text-secondary)]">
+                    <CalendarDays className="size-3.5 text-[var(--text-muted)]" />
                     {item.period.start} → {item.period.end}
-                    {item.engagement ? ` • ${item.engagement}` : ""}
+                    {item.engagement ? ` · ${item.engagement}` : ""}
                   </p>
                   <p className="mt-5 text-[var(--text-secondary)]">{item.description}</p>
                   <ul className="mt-5 space-y-3 text-sm leading-7 text-[var(--text-secondary)]">

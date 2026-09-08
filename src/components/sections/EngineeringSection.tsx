@@ -32,7 +32,7 @@ export default function EngineeringSection() {
             Core Delivery Strengths
           </h2>
           <p className="mt-4 text-lg text-[var(--text-secondary)]">
-            The capabilities and system patterns that show up repeatedly across my resume.
+            The patterns and strengths I bring into the products I build.
           </p>
         </div>
 
@@ -46,8 +46,8 @@ export default function EngineeringSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                whileHover={{ y: -8, scale: 1.015 }}
                 className="surface-panel rounded-[1.75rem] border border-white/8 p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
               >
                 <div className="mb-5 inline-flex size-12 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">

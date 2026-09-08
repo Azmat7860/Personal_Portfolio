@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, Menu, X } from "lucide-react";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
 import Tooltip from "@/components/common/Tooltip";
@@ -15,8 +16,23 @@ const socialIconMap = {
   Email: Mail,
 };
 
+function scrollToId(id: string) {
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  if (window.__lenis) {
+    window.__lenis.scrollTo(target, { offset: -24, duration: 1 });
+  } else {
+    window.scrollTo({
+      top: target.offsetTop - 24,
+      behavior: "smooth",
+    });
+  }
+}
+
 export default function Navigation() {
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +45,24 @@ export default function Navigation() {
   }, []);
 
   useEffect(() => {
+    if (pathname !== "/") return;
+
+    const rawHash = window.location.hash.replace(/^#/, "");
+    const hash = rawHash.split("#")[0]?.trim();
+    if (!hash) return;
+
+    // Normalize accidental duplicated hashes like #projects#projects
+    if (rawHash.includes("#") || window.location.hash !== `#${hash}`) {
+      window.history.replaceState(null, "", `/#${hash}`);
+    }
+
+    const timer = window.setTimeout(() => scrollToId(hash), 80);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
     const updateActiveSection = () => {
       const marker = window.scrollY + 180;
       let current = navigationItems[0]?.id ?? "hero";
@@ -51,7 +85,7 @@ export default function Navigation() {
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("resize", updateActiveSection);
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -60,27 +94,50 @@ export default function Navigation() {
     };
   }, [menuOpen]);
 
-  const scrollToSection = (id: string) => {
+  const goToSection = (id: string) => {
+    setMenuOpen(false);
+
     if (pathname !== "/") {
-      window.location.href = id === "hero" ? "/" : `/#${id}`;
-      setMenuOpen(false);
+      router.push(id === "hero" ? "/" : `/#${id}`);
       return;
     }
 
-    const target = document.getElementById(id);
-    if (!target) return;
+    const nextUrl = id === "hero" ? "/" : `/#${id}`;
+    window.history.pushState(null, "", nextUrl);
 
-    if (window.__lenis) {
-      window.__lenis.scrollTo(target, { offset: -24, duration: 1 });
-    } else {
-      window.scrollTo({
-        top: target.offsetTop - 24,
-        behavior: "smooth",
-      });
+    if (id === "hero") {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      setActiveSection("hero");
+      return;
     }
 
-    setMenuOpen(false);
+    setActiveSection(id);
+    scrollToId(id);
   };
+
+  const brandMark = (
+    <>
+      <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
+        <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[rgba(4,4,10,0.92)]" />
+        <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-white">
+          A
+          <span className="-ml-1 accent-text">K</span>
+        </span>
+      </span>
+      <span className="hidden flex-col text-left md:flex">
+        <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-white">
+          Azmat Ullah Khan
+        </span>
+        <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-muted)]">
+          Full Stack Developer
+        </span>
+      </span>
+    </>
+  );
 
   return (
     <>
@@ -93,45 +150,41 @@ export default function Navigation() {
         )}
       >
         <div className="container-shell flex h-18 items-center justify-between gap-4">
-          <button
-            type="button"
-            onClick={() => scrollToSection("hero")}
-            className="group relative flex items-center gap-3"
-            aria-label="Go to home section"
-          >
-            <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
-              <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[rgba(4,4,10,0.92)]" />
-              <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-white">
-                A
-                <span className="-ml-1 accent-text">K</span>
-              </span>
-            </span>
-            <span className="hidden flex-col text-left md:flex">
-              <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-white">
-                Azmat Ullah Khan
-              </span>
-              <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-muted)]">
-                Full Stack Developer
-              </span>
-            </span>
-          </button>
+          {pathname === "/" ? (
+            <button
+              type="button"
+              onClick={() => goToSection("hero")}
+              className="group relative flex items-center gap-3"
+              aria-label="Go to home section"
+            >
+              {brandMark}
+            </button>
+          ) : (
+            <Link
+              href="/"
+              className="group relative flex items-center gap-3"
+              aria-label="Go to home"
+            >
+              {brandMark}
+            </Link>
+          )}
 
           <div className="hidden items-center gap-8 rounded-full border border-white/8 bg-white/[0.02] px-5 py-3 lg:flex">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => goToSection(item.id)}
                 className={cn(
                   "group relative text-sm font-medium transition-colors",
-                  activeSection === item.id
+                  pathname === "/" && activeSection === item.id
                     ? "text-[var(--text-primary)]"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
                 )}
               >
                 {item.label}
                 <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
-                {activeSection === item.id ? (
+                {pathname === "/" && activeSection === item.id ? (
                   <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
                 ) : null}
               </button>
@@ -190,11 +243,11 @@ export default function Navigation() {
                     <motion.button
                       key={item.id}
                       type="button"
-                      onClick={() => scrollToSection(item.id)}
+                      onClick={() => goToSection(item.id)}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.08 }}
-                      className="block font-[family-name:var(--font-outfit)] text-[2rem] font-semibold tracking-[-0.04em] text-left"
+                      className="block text-left font-[family-name:var(--font-outfit)] text-[2rem] font-semibold tracking-[-0.04em]"
                     >
                       {item.label}
                     </motion.button>

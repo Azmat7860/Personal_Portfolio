@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Cloud, Database, Monitor, Server } from "lucide-react";
+import { Database, Monitor, Server, Sparkles } from "lucide-react";
 
 const stackNodes = [
   {
@@ -26,10 +26,10 @@ const stackNodes = [
     accent: "from-emerald-400 to-cyan-400",
   },
   {
-    label: "Docker / AWS",
-    tier: "Infrastructure",
-    code: "OPS",
-    icon: Cloud,
+    label: "OpenAI / RAG / Agents",
+    tier: "AI Layer",
+    code: "AI",
+    icon: Sparkles,
     accent: "from-violet-500 to-fuchsia-500",
   },
 ];
@@ -41,13 +41,13 @@ export default function StackVisualization() {
     <div className="surface-panel relative hidden w-full max-w-[392px] overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.12),transparent_40%),rgba(10,10,20,0.92)] p-5 lg:block">
       <div className="absolute inset-0 grid-overlay opacity-45" />
       <div className="relative z-10">
-        <div className="mb-5 flex items-end justify-between">
+        <div className="mb-5 flex items-end justify-between gap-3">
           <div>
             <p className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-[var(--text-code)]">
-              Live architecture
+              Core stack
             </p>
             <h3 className="mt-2 font-[family-name:var(--font-outfit)] text-2xl font-semibold tracking-[-0.04em] text-white">
-              Production Stack
+              What I Build With
             </h3>
           </div>
           <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-[var(--text-secondary)]">
@@ -66,6 +66,7 @@ export default function StackVisualization() {
                   whileInView={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ duration: 0.45, delay: index * 0.1 }}
+                  whileHover={shouldReduceMotion ? undefined : { x: 4 }}
                   className="flex items-center gap-4 rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 backdrop-blur-sm"
                 >
                   <div className="relative flex size-16 shrink-0 items-center justify-center rounded-[1.35rem] border border-white/10 bg-[rgba(7,10,20,0.88)]">
@@ -98,15 +99,6 @@ export default function StackVisualization() {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-[var(--text-secondary)]">
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3">
-            Modular frontend orchestration
-          </div>
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3">
-            Typed APIs and dependable services
-          </div>
         </div>
       </div>
     </div>

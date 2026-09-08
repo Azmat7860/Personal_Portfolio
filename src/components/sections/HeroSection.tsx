@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
 import GradientText from "@/components/common/GradientText";
 import NoiseSurface from "@/components/common/NoiseSurface";
+import SectionLink from "@/components/common/SectionLink";
 import StackVisualization from "@/components/common/StackVisualization";
 import Tooltip from "@/components/common/Tooltip";
 import { personal } from "@/data/personal";
@@ -95,7 +96,7 @@ export default function HeroSection() {
                 3+ years professional experience
               </span>
               <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-[var(--text-secondary)]">
-                AI SaaS • Enterprise Apps • MERN
+                AI SaaS · Enterprise Apps · MERN
               </span>
             </div>
           </motion.div>
@@ -129,14 +130,14 @@ export default function HeroSection() {
             variants={fadeInUp}
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
-            <Link
-              href="/#work"
+            <SectionLink
+              sectionId="work"
               className="ambient-glow inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium text-black shadow-[var(--shadow-glow)] hover:-translate-y-1"
               style={{ background: "var(--gradient-accent)" }}
             >
               View My Work
               <ArrowRight className="size-4" />
-            </Link>
+            </SectionLink>
             <a
               href="/Azmat_Ullah_Khan_Resume.pdf"
               download

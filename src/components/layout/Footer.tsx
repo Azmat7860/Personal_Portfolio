@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
+import SectionLink from "@/components/common/SectionLink";
 import Tooltip from "@/components/common/Tooltip";
 import { navigationItems, personal } from "@/data/personal";
 
@@ -29,13 +30,13 @@ export default function Footer() {
             {navigationItems
               .filter((item) => item.id !== "hero")
               .map((item) => (
-                <a
+                <SectionLink
                   key={item.id}
-                  href={`/#${item.id}`}
+                  sectionId={item.id}
                   className="cursor-pointer hover:text-white"
                 >
                   {item.label}
-                </a>
+                </SectionLink>
               ))}
           </div>
 
