@@ -24,7 +24,10 @@ export const projects: Project[] = [
       "TanStack Table",
     ],
     category: "fullstack",
-    links: { caseStudy: "/projects#highgear-platform" },
+    links: {
+      caseStudy: "/projects#highgear-platform",
+      live: "https://www.highgeardata.com/",
+    },
     featured: true,
     gradient:
       "linear-gradient(135deg, rgba(0, 210, 255, 0.16), rgba(139, 92, 246, 0.12))",
@@ -52,7 +55,10 @@ export const projects: Project[] = [
       "OpenAI",
     ],
     category: "fullstack",
-    links: { caseStudy: "/projects#knowly-platform" },
+    links: {
+      caseStudy: "/projects#knowly-platform",
+      live: "https://www.knowlyeducation.com/",
+    },
     featured: true,
     gradient:
       "linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(16, 185, 129, 0.12))",
