@@ -48,9 +48,9 @@ export default function EngineeringSection() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
                 whileHover={{ y: -8, scale: 1.015 }}
-                className="surface-panel rounded-[1.75rem] border border-white/8 p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
+                className="surface-panel rounded-[1.75rem] border border-[var(--border-subtle)] p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
               >
-                <div className="mb-5 inline-flex size-12 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
+                <div className="mb-5 inline-flex size-12 items-center justify-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
                   <Icon className="size-5" />
                 </div>
                 <h3 className="font-[family-name:var(--font-outfit)] text-xl font-semibold">
@@ -63,7 +63,7 @@ export default function EngineeringSection() {
                   {principle.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-xs text-[var(--text-muted)]"
+                      className="rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-3 py-1 text-xs text-[var(--text-muted)]"
                     >
                       {tag}
                     </span>

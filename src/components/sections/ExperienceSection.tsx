@@ -40,10 +40,10 @@ export default function ExperienceSection() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.45 }}
                   whileHover={{ y: -6 }}
-                  className="surface-panel ml-10 rounded-[1.75rem] border border-white/8 p-6 md:ml-0"
+                  className="surface-panel ml-10 rounded-[1.75rem] border border-[var(--border-subtle)] p-6 md:ml-0"
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex size-8 items-center justify-center rounded-xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
+                    <span className="inline-flex size-8 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
                       <Briefcase className="size-3.5" />
                     </span>
                     <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold">
@@ -77,7 +77,7 @@ export default function ExperienceSection() {
           <div className="mt-6 flex justify-center">
             <Link
               href="/companies"
-              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white hover:-translate-y-1 hover:border-[var(--border-accent)]"
+              className="inline-flex items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
             >
               View All Companies
             </Link>

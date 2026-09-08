@@ -54,9 +54,9 @@ export default function AboutSection() {
                   key={stat.label}
                   variants={fadeInUp}
                   whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.01 }}
-                  className="surface-panel relative rounded-3xl border border-white/8 p-5 pr-12 hover:border-[var(--border-accent)]"
+                  className="surface-panel relative rounded-3xl border border-[var(--border-subtle)] p-5 pr-12 hover:border-[var(--border-accent)]"
                 >
-                  <div className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
+                  <div className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
                     <Icon className="size-4" />
                   </div>
                   <p className="font-[family-name:var(--font-outfit)] text-4xl font-bold tracking-[-0.05em]">
@@ -78,7 +78,7 @@ export default function AboutSection() {
 
           <motion.div
             variants={fadeInUp}
-            className="surface-panel mt-4 rounded-3xl border border-white/8 p-6"
+            className="surface-panel mt-4 rounded-3xl border border-[var(--border-subtle)] p-6"
           >
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
               Status
@@ -91,7 +91,7 @@ export default function AboutSection() {
                   <div
                     key={item.label}
                     className={`flex items-start gap-3 ${
-                      index !== 0 ? "border-t border-white/6 pt-3" : ""
+                      index !== 0 ? "border-t border-[var(--border-subtle)] pt-3" : ""
                     }`}
                   >
                     <Icon className="mt-0.5 size-4 shrink-0 text-[var(--accent-cyan)]" />
@@ -104,18 +104,18 @@ export default function AboutSection() {
 
           <motion.div
             variants={fadeInUp}
-            className="surface-panel mt-4 rounded-3xl border border-white/8 p-6"
+            className="surface-panel mt-4 rounded-3xl border border-[var(--border-subtle)] p-6"
           >
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
               Education
             </p>
-            <h3 className="font-[family-name:var(--font-outfit)] text-xl font-semibold text-white">
+            <h3 className="font-[family-name:var(--font-outfit)] text-xl font-semibold text-[var(--text-primary)]">
               {personal.education.degree}
             </h3>
             <p className="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
               {personal.education.school}
             </p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-code)]">
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-code)]">
               <CalendarDays className="size-3.5" />
               {personal.education.period}
             </div>
@@ -129,7 +129,7 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55 }}
         >
-          <p className="mb-3 font-[family-name:var(--font-outfit)] text-[clamp(1.5rem,2.5vw,2.35rem)] font-semibold tracking-[-0.04em] text-white">
+          <p className="mb-3 font-[family-name:var(--font-outfit)] text-[clamp(1.5rem,2.5vw,2.35rem)] font-semibold tracking-[-0.04em] text-[var(--text-primary)]">
             Professional Summary
           </p>
           <h2 className="section-heading">The Engineer Behind the Code</h2>

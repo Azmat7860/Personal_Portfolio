@@ -21,7 +21,7 @@ export default function CompaniesPage() {
           </p>
           <SectionLink
             sectionId="work"
-            className="mt-8 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white hover:-translate-y-1 hover:border-[var(--border-accent)]"
+            className="mt-8 inline-flex rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
           >
             Back to Home
           </SectionLink>
@@ -31,7 +31,7 @@ export default function CompaniesPage() {
           {experience.map((item) => (
             <article
               key={item.id}
-              className="surface-panel rounded-[2rem] border border-white/8 p-6 md:p-8"
+              className="surface-panel rounded-[2rem] border border-[var(--border-subtle)] p-6 md:p-8"
             >
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-3xl">
@@ -53,7 +53,7 @@ export default function CompaniesPage() {
                     href={item.companyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex cursor-pointer rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white hover:border-[var(--border-accent)]"
+                    className="inline-flex cursor-pointer rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-4 py-2 text-sm text-[var(--text-primary)] hover:border-[var(--border-accent)]"
                   >
                     Visit company
                   </a>

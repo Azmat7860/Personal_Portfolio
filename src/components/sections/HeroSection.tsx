@@ -73,7 +73,7 @@ export default function HeroSection() {
         >
           <motion.div
             variants={fadeInUp}
-            className="mb-6 inline-flex items-center gap-3 rounded-full border border-[var(--border-accent)] bg-black/20 px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--text-code)]"
+            className="mb-6 inline-flex items-center gap-3 rounded-full border border-[var(--border-accent)] bg-[var(--hero-pill)] px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--text-code)]"
           >
             <span>{personal.heroPill}</span>
             <span
@@ -92,10 +92,10 @@ export default function HeroSection() {
               </GradientText>
             </h1>
             <div className="mt-5 flex flex-wrap gap-3">
-              <span className="ambient-glow rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-[var(--text-secondary)]">
+              <span className="ambient-glow rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-4 py-2 text-sm text-[var(--text-secondary)]">
                 3+ years professional experience
               </span>
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-[var(--text-secondary)]">
+              <span className="rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-4 py-2 text-sm text-[var(--text-secondary)]">
                 AI SaaS · Enterprise Apps · MERN
               </span>
             </div>
@@ -132,7 +132,7 @@ export default function HeroSection() {
           >
             <SectionLink
               sectionId="work"
-              className="ambient-glow inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium text-black shadow-[var(--shadow-glow)] hover:-translate-y-1"
+              className="ambient-glow inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium text-[var(--cta-ink)] shadow-[var(--shadow-glow)] hover:-translate-y-1"
               style={{ background: "var(--gradient-accent)" }}
             >
               View My Work
@@ -141,7 +141,7 @@ export default function HeroSection() {
             <a
               href="/Azmat_Ullah_Khan_Resume.pdf"
               download
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-default)] bg-white/[0.02] px-6 py-3 text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-hover)] hover:bg-white/[0.04]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--panel-muted)] px-6 py-3 text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-hover)] hover:bg-[var(--panel-soft)]"
             >
               Download Resume
               <Download className="size-4" />
@@ -159,7 +159,7 @@ export default function HeroSection() {
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={item.label}
-                    className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-[var(--border-accent)] hover:text-white"
+                    className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] text-[var(--text-secondary)] hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
                   >
                     <Icon className="size-4" />
                   </a>
@@ -186,7 +186,7 @@ export default function HeroSection() {
         animate={shouldReduceMotion ? undefined : { y: [0, 8, 0] }}
         transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY }}
       >
-        <div className="mb-2 flex h-12 w-7 justify-center rounded-full border border-white/10">
+        <div className="mb-2 flex h-12 w-7 justify-center rounded-full border border-[var(--border-default)]">
           <span className="mt-2 h-3 w-1 rounded-full bg-[var(--accent-cyan)]" />
         </div>
         <ArrowDown className="size-4" />
