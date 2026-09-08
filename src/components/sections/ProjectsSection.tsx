@@ -1,23 +1,24 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Lightbulb, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import BrowserMockup from "@/components/common/BrowserMockup";
+import ProjectFilterBar from "@/components/common/ProjectFilterBar";
 import SectionWrapper from "@/components/common/SectionWrapper";
 import TechBadge from "@/components/common/TechBadge";
+import { type ProjectFilterId } from "@/data/projectFilters";
 import { projects } from "@/data/projects";
 
-const filters = [
-  { id: "all", label: "All" },
-  { id: "fullstack", label: "Full Stack" },
-  { id: "backend", label: "Backend" },
-  { id: "frontend", label: "Frontend" },
-] as const;
+const detailIcons = {
+  Challenge: Target,
+  Solution: Lightbulb,
+  Impact: TrendingUp,
+} as const;
 
 export default function ProjectsSection() {
-  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]["id"]>("all");
+  const [activeFilter, setActiveFilter] = useState<ProjectFilterId>("all");
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "all") return projects;
@@ -32,30 +33,12 @@ export default function ProjectsSection() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="section-kicker">Projects</p>
-            <h2 className="section-heading">Resume-Aligned Product Work</h2>
+            <h2 className="section-heading">Projects I&apos;ve Built</h2>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              type="button"
-              onClick={() => setActiveFilter(filter.id)}
-              className={`rounded-full px-4 py-2 text-sm ${
-                activeFilter === filter.id
-                  ? "text-black"
-                  : "border border-white/10 bg-white/[0.03] text-[var(--text-secondary)]"
-              }`}
-              style={
-                activeFilter === filter.id
-                  ? { background: "var(--gradient-accent)" }
-                  : undefined
-              }
-            >
-              {filter.label}
-            </button>
-          ))}
+        <div className="mt-8">
+          <ProjectFilterBar activeFilter={activeFilter} onChange={setActiveFilter} />
         </div>
 
         <div className="mt-10 space-y-8">
@@ -64,6 +47,10 @@ export default function ProjectsSection() {
               <motion.article
                 key={project.id}
                 layout
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4 }}
                 whileHover={{ y: -6, scale: 1.008 }}
                 className="surface-panel relative overflow-hidden rounded-[2rem] border border-white/8 p-6 md:p-8"
                 style={{ background: project.gradient }}
@@ -86,18 +73,25 @@ export default function ProjectsSection() {
                     </p>
 
                     <div className="mt-7 space-y-4 text-sm">
-                      {[
-                        ["Challenge", project.challenge],
-                        ["Solution", project.solution],
-                        ["Impact", project.impact],
-                      ].map(([label, value]) => (
-                        <div key={label} className="grid gap-2 md:grid-cols-[120px_1fr]">
-                          <p className="font-mono uppercase tracking-[0.24em] text-[var(--text-muted)]">
-                            {label}
-                          </p>
-                          <p className="text-[var(--text-secondary)]">{value}</p>
-                        </div>
-                      ))}
+                      {(
+                        [
+                          ["Challenge", project.challenge],
+                          ["Solution", project.solution],
+                          ["Impact", project.impact],
+                        ] as const
+                      ).map(([label, value]) => {
+                        const Icon = detailIcons[label];
+
+                        return (
+                          <div key={label} className="grid gap-2 md:grid-cols-[140px_1fr]">
+                            <p className="inline-flex items-center gap-2 font-mono uppercase tracking-[0.24em] text-[var(--text-muted)]">
+                              <Icon className="size-3.5 text-[var(--accent-cyan)]" />
+                              {label}
+                            </p>
+                            <p className="text-[var(--text-secondary)]">{value}</p>
+                          </div>
+                        );
+                      })}
                     </div>
 
                     <div className="mt-6 flex flex-wrap gap-3">

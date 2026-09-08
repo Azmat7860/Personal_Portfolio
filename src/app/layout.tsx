@@ -3,23 +3,26 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 export const metadata: Metadata = {
-  title: "Azmat Ullah Khan | Senior Software Developer",
+  title: "Azmat Ullah Khan | Full Stack Software Engineer",
   description:
-    "Senior Software Developer specializing in Next.js, React, TypeScript, enterprise analytics dashboards, AI SaaS products, and secure full-stack systems.",
+    "Full Stack Software Engineer specializing in React.js, Next.js, TypeScript, Node.js, AI-powered features (OpenAI, RAG, agents), enterprise SaaS, and secure full-stack systems.",
   keywords: [
     "Azmat Ullah Khan",
-    "Full Stack Developer",
+    "Full Stack Software Engineer",
     "MERN Stack",
     "React Developer",
     "Node.js",
     "TypeScript",
     "Next.js",
+    "OpenAI",
+    "RAG",
+    "AI Agents",
     "Software Engineer",
   ],
   openGraph: {
-    title: "Azmat Ullah Khan | Senior Software Developer",
+    title: "Azmat Ullah Khan | Full Stack Software Engineer",
     description:
-      "Building analytics SaaS, role-based enterprise applications, and secure full-stack systems with React, Next.js, TypeScript, and OpenAI integrations.",
+      "Building AI-powered SaaS, analytics platforms, and secure full-stack systems with React, Next.js, TypeScript, Node.js, and OpenAI.",
     type: "website",
   },
   icons: {

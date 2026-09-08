@@ -13,7 +13,7 @@ export const engineeringPrinciples: EngineeringPrinciple[] = [
     id: "rbac",
     title: "Role-Based Product Design",
     description:
-      "Many of the systems I build serve multiple personas. I design around permission hierarchies, secure user flows, and admin control surfaces from the start.",
+      "A lot of the systems I build serve multiple user types. I design around permissions, secure flows, and admin controls from the start.",
     icon: "Shield",
     tags: ["RBAC", "Auth", "Enterprise"],
   },
@@ -21,32 +21,32 @@ export const engineeringPrinciples: EngineeringPrinciple[] = [
     id: "ai-integration",
     title: "Practical AI Integration",
     description:
-      "I use AI where it adds product value, like contextual summaries and intelligent insights, not just as a novelty feature.",
+      "I use AI where it helps the product: OpenAI insights, adaptive lessons, RAG workflows, AI agents, and MCP-style integrations.",
     icon: "TrendingUp",
-    tags: ["OpenAI", "Insights", "Product"],
+    tags: ["OpenAI", "RAG", "AI Agents", "MCP"],
   },
   {
     id: "auth-security",
     title: "Security in User Flows",
     description:
-      "Authentication and authorization are product features. I build secure flows with Cognito, JWT, RBAC, and session-aware interfaces.",
+      "Auth is part of the product. I build secure flows with JWT, RBAC, session management, and platform auth when the project needs it.",
     icon: "Zap",
-    tags: ["Cognito", "JWT", "Access Control"],
+    tags: ["JWT", "RBAC", "Sessions"],
   },
   {
     id: "data-workflows",
     title: "Scalable Data Workflows",
     description:
-      "From multi-column filtering to large exports and table-heavy interfaces, I care about making data-intensive workflows fast and understandable.",
+      "From filtering and large tables to exports, I focus on making data-heavy workflows fast and easy to understand.",
     icon: "Layers",
-    tags: ["TanStack Table", "ExcelJS", "PostgreSQL"],
+    tags: ["TanStack Table", "PostgreSQL", "Supabase"],
   },
   {
     id: "delivery",
     title: "Cross-Functional Delivery",
     description:
-      "I work comfortably in Agile teams, collaborating with designers, product stakeholders, and fellow engineers to ship reliable software on time.",
+      "I work well in Agile teams, with code review, CI/CD, and close collaboration with designers and product stakeholders.",
     icon: "BookOpen",
-    tags: ["Agile", "Delivery", "Collaboration"],
+    tags: ["Agile", "CI/CD", "Collaboration"],
   },
 ];

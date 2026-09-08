@@ -1,6 +1,6 @@
-import Link from "next/link";
 import CustomCursor from "@/components/common/CustomCursor";
 import ScrollProgress from "@/components/common/ScrollProgress";
+import SectionLink from "@/components/common/SectionLink";
 import Footer from "@/components/layout/Footer";
 import Navigation from "@/components/layout/Navigation";
 import TechBadge from "@/components/common/TechBadge";
@@ -17,15 +17,14 @@ export default function CompaniesPage() {
           <p className="section-kicker">Companies</p>
           <h1 className="section-heading">Professional Experience</h1>
           <p className="mt-5 text-lg leading-8 text-[var(--text-secondary)]">
-            A complete view of the companies, roles, and delivery highlights from my
-            resume.
+            A closer look at the companies I have worked with, the roles I held, and what I delivered.
           </p>
-          <Link
-            href="/#work"
+          <SectionLink
+            sectionId="work"
             className="mt-8 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white hover:-translate-y-1 hover:border-[var(--border-accent)]"
           >
             Back to Home
-          </Link>
+          </SectionLink>
         </div>
 
         <div className="mt-12 grid gap-6">
