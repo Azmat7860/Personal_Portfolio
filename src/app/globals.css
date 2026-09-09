@@ -380,27 +380,6 @@ textarea {
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-line {
-  0% {
-    stroke-dashoffset: 100;
-  }
-
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
 @keyframes blink {
   0%,
   100% {

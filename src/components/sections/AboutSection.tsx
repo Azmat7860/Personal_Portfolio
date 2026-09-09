@@ -18,6 +18,7 @@ import { personal } from "@/data/personal";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 const statusIconMap = {
   MapPin,
@@ -28,6 +29,8 @@ const statusIconMap = {
 
 export default function AboutSection() {
   const shouldReduceMotion = useReducedMotion();
+  const hasMounted = useHasMounted();
+  const canAnimate = hasMounted && !shouldReduceMotion;
   const resolvedStats = [
     { label: "Years Experience", display: "3+", icon: CalendarDays },
     { label: "Companies", display: String(experience.length), icon: Building2 },
@@ -40,8 +43,8 @@ export default function AboutSection() {
       <div className="container-shell grid min-w-0 gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
         <motion.div
           variants={staggerContainer}
-          initial={shouldReduceMotion ? false : "hidden"}
-          whileInView={shouldReduceMotion ? undefined : "visible"}
+          initial={false}
+          whileInView={canAnimate ? "visible" : undefined}
           viewport={{ once: true, amount: 0.2 }}
         >
           <p className="section-kicker">About</p>
@@ -53,13 +56,14 @@ export default function AboutSection() {
                 <motion.article
                   key={stat.label}
                   variants={fadeInUp}
-                  whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.01 }}
-                  className="surface-panel relative rounded-3xl border border-[var(--border-subtle)] p-5 pr-12 hover:border-[var(--border-accent)]"
+                  initial={false}
+                  whileHover={canAnimate ? { y: -6, scale: 1.01 } : undefined}
+                  className="surface-panel relative overflow-hidden rounded-3xl border border-[var(--border-subtle)] p-4 pr-11 sm:p-5 sm:pr-12 hover:border-[var(--border-accent)]"
                 >
                   <div className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
                     <Icon className="size-4" />
                   </div>
-                  <p className="font-[family-name:var(--font-outfit)] text-4xl font-bold tracking-[-0.05em]">
+                  <p className="font-[family-name:var(--font-outfit)] text-[clamp(1.75rem,5vw,2.25rem)] font-bold tracking-[-0.05em]">
                     <GradientText>
                       {/\d/.test(stat.display) ? (
                         <AnimatedCounter value={stat.display} />
@@ -78,6 +82,7 @@ export default function AboutSection() {
 
           <motion.div
             variants={fadeInUp}
+            initial={false}
             className="surface-panel mt-4 rounded-3xl border border-[var(--border-subtle)] p-6"
           >
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
@@ -104,6 +109,7 @@ export default function AboutSection() {
 
           <motion.div
             variants={fadeInUp}
+            initial={false}
             className="surface-panel mt-4 rounded-3xl border border-[var(--border-subtle)] p-6"
           >
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
@@ -123,19 +129,21 @@ export default function AboutSection() {
         </motion.div>
 
         <motion.div
-          className="max-w-[38rem]"
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          className="max-w-[38rem] min-w-0"
+          initial={false}
+          whileInView={canAnimate ? { opacity: 1, y: 0 } : undefined}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55 }}
         >
-          <p className="mb-3 font-[family-name:var(--font-outfit)] text-[clamp(1.5rem,2.5vw,2.35rem)] font-semibold tracking-[-0.04em] text-[var(--text-primary)]">
-            Professional Summary
-          </p>
-          <h2 className="section-heading">The Engineer Behind the Code</h2>
-          <div className="mt-6 space-y-5 text-[1.04rem] leading-8 text-[var(--text-secondary)]">
+          <h2 className="font-[family-name:var(--font-outfit)] text-[clamp(1.5rem,2.5vw,2.35rem)] font-semibold tracking-[-0.04em] text-[var(--text-primary)]">
+            The Engineer Behind the Code
+          </h2>
+          <p className="section-heading mt-2">Professional Summary</p>
+          <div className="mt-6 space-y-5 text-[1.04rem] leading-7 text-[var(--text-secondary)] sm:leading-8">
             {personal.about.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph} className="min-w-0">
+                {paragraph}
+              </p>
             ))}
           </div>
         </motion.div>

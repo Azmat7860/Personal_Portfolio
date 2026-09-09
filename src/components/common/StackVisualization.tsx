@@ -55,17 +55,22 @@ export default function StackVisualization() {
           </div>
         </div>
 
-        <div className="space-y-3" aria-label="Technology stack visualization">
+        <div className="space-y-3" role="list" aria-label="Technology stack visualization">
           {stackNodes.map((node, index) => {
             const Icon = node.icon;
 
             return (
-              <div key={node.label}>
+              <div key={node.label} role="listitem">
                 <motion.div
-                  initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
+                  initial={false}
+                  whileInView={
+                    shouldReduceMotion ? undefined : { opacity: 1, x: 0 }
+                  }
                   viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.45, delay: index * 0.1 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.45,
+                    delay: shouldReduceMotion ? 0 : index * 0.1,
+                  }}
                   whileHover={shouldReduceMotion ? undefined : { x: 4 }}
                   className="flex items-center gap-4 rounded-[1.5rem] border border-[var(--border-subtle)] bg-[var(--panel-soft)] p-4 backdrop-blur-sm"
                 >

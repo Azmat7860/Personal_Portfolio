@@ -4,10 +4,8 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useRef,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -21,6 +19,7 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 export const THEME_STORAGE_KEY = "azmat-portfolio-theme";
+const THEME_CHANGE_EVENT = "azmat-theme-change";
 
 function readDomTheme(): Theme {
   if (typeof document === "undefined") return "dark";
@@ -46,30 +45,42 @@ function persistTheme(theme: Theme) {
   }
 }
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-  const themeRef = useRef<Theme>("dark");
+function subscribeTheme(onStoreChange: () => void) {
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === THEME_STORAGE_KEY) onStoreChange();
+  };
 
-  useEffect(() => {
-    const initial = readDomTheme();
-    themeRef.current = initial;
-    setThemeState(initial);
-    applyTheme(initial);
-  }, []);
+  window.addEventListener("storage", onStorage);
+  window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
+
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
+  };
+}
+
+function notifyThemeListeners() {
+  window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    readDomTheme,
+    () => "dark" as const,
+  );
 
   const setTheme = useCallback((next: Theme) => {
-    themeRef.current = next;
-    setThemeState(next);
     applyTheme(next);
     persistTheme(next);
+    notifyThemeListeners();
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const next: Theme = themeRef.current === "dark" ? "light" : "dark";
-    themeRef.current = next;
-    setThemeState(next);
+    const next: Theme = readDomTheme() === "dark" ? "light" : "dark";
     applyTheme(next);
     persistTheme(next);
+    notifyThemeListeners();
   }, []);
 
   const value = useMemo(

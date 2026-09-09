@@ -5,6 +5,7 @@ import { BookOpen, Cloud, Database, Monitor, Server, Sparkles } from "lucide-rea
 import SectionWrapper from "@/components/common/SectionWrapper";
 import TechBadge from "@/components/common/TechBadge";
 import { skillCategories, skillsTicker } from "@/data/skills";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 const iconMap = {
   BookOpen,
@@ -17,6 +18,8 @@ const iconMap = {
 
 export default function SkillsSection() {
   const shouldReduceMotion = useReducedMotion();
+  const hasMounted = useHasMounted();
+  const canAnimate = hasMounted && !shouldReduceMotion;
 
   return (
     <SectionWrapper id="stack">
@@ -36,11 +39,14 @@ export default function SkillsSection() {
             return (
               <motion.article
                 key={category.id}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
-                whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                initial={false}
+                whileInView={canAnimate ? { opacity: 1, y: 0 } : undefined}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.06 }}
-                whileHover={shouldReduceMotion ? undefined : { y: -8, scale: 1.01 }}
+                transition={{
+                  duration: canAnimate ? 0.45 : 0,
+                  delay: canAnimate ? index * 0.06 : 0,
+                }}
+                whileHover={canAnimate ? { y: -8, scale: 1.01 } : undefined}
                 className="surface-panel rounded-[1.75rem] border border-[var(--border-subtle)] p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
               >
                 <div className="mb-5 inline-flex size-11 items-center justify-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
@@ -66,16 +72,23 @@ export default function SkillsSection() {
           })}
         </div>
 
-        <div className="ticker-mask mt-8 overflow-x-hidden overflow-hidden rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-0 py-3.5">
+        <div
+          className="ticker-mask mt-8 overflow-x-hidden overflow-hidden rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-0 py-3.5"
+          aria-hidden={canAnimate ? true : undefined}
+        >
           <div
             className="flex min-w-max gap-8 font-mono text-sm text-[var(--text-muted)]"
-            style={{ animation: shouldReduceMotion ? undefined : "marquee 60s linear infinite" }}
+            style={{
+              animation: canAnimate ? "marquee 60s linear infinite" : undefined,
+            }}
           >
-            {[...skillsTicker, ...skillsTicker].map((item, index) => (
-              <span key={`${item}-${index}`} className="whitespace-nowrap">
-                → {item}
-              </span>
-            ))}
+            {(canAnimate ? [...skillsTicker, ...skillsTicker] : skillsTicker).map(
+              (item, index) => (
+                <span key={`${item}-${index}`} className="whitespace-nowrap">
+                  → {item}
+                </span>
+              ),
+            )}
           </div>
         </div>
       </div>

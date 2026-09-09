@@ -1,16 +1,16 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTheme } from "@/components/providers/ThemeProvider";
+
+function subscribe() {
+  return () => {};
+}
 
 export default function ThemeToggle({ className = "" }: { className?: string }) {
   const { theme, toggleTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
 
   const nextLabel =
     theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
@@ -30,9 +30,9 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
       {!mounted ? (
         <Sun className="size-4" aria-hidden />
       ) : theme === "dark" ? (
-        <Sun className="size-4" />
+        <Sun className="size-4" aria-hidden />
       ) : (
-        <Moon className="size-4" />
+        <Moon className="size-4" aria-hidden />
       )}
     </button>
   );

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Azmat Ullah Khan | Full Stack Software Engineer",
+  title: {
+    default: "Azmat Ullah Khan | Full Stack Software Engineer",
+    template: "%s | Azmat Ullah Khan",
+  },
   description:
     "Full Stack Software Engineer specializing in React.js, Next.js, TypeScript, Node.js, AI-powered features (OpenAI, RAG, agents), enterprise SaaS, and secure full-stack systems.",
   keywords: [
@@ -20,11 +24,24 @@ export const metadata: Metadata = {
     "AI Agents",
     "Software Engineer",
   ],
+  authors: [{ name: "Azmat Ullah Khan" }],
+  creator: "Azmat Ullah Khan",
   openGraph: {
     title: "Azmat Ullah Khan | Full Stack Software Engineer",
     description:
       "Building AI-powered SaaS, analytics platforms, and secure full-stack systems with React, Next.js, TypeScript, Node.js, and OpenAI.",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Azmat Ullah Khan | Full Stack Software Engineer",
+    description:
+      "Building AI-powered SaaS, analytics platforms, and secure full-stack systems with React, Next.js, TypeScript, Node.js, and OpenAI.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
@@ -54,10 +71,10 @@ export default function RootLayout({
   return (
     // Do not put theme classes in React className — hydration would wipe them.
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="min-h-full bg-[var(--bg-primary)] font-[family-name:var(--font-dm-sans)] text-[var(--text-primary)] antialiased">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <ThemeProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </ThemeProvider>

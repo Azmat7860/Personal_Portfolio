@@ -65,9 +65,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex min-w-0 flex-col gap-3 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Azmat Ullah Khan. All rights reserved.</p>
-          <p>{personal.email} · {personal.phone}</p>
+          <p className="min-w-0 break-words">
+            {personal.email} · {personal.phone}
+          </p>
         </div>
       </div>
     </footer>

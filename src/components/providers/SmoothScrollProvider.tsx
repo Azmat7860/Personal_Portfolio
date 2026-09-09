@@ -1,7 +1,9 @@
 "use client";
 
 import Lenis from "@studio-freight/lenis";
+import { MotionConfig } from "framer-motion";
 import { useEffect } from "react";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 declare global {
   interface Window {
@@ -14,6 +16,8 @@ export default function SmoothScrollProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const hasMounted = useHasMounted();
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -48,5 +52,10 @@ export default function SmoothScrollProvider({
     };
   }, []);
 
-  return <>{children}</>;
+  // Keep SSR and first client paint aligned; apply user preference after mount.
+  return (
+    <MotionConfig reducedMotion={hasMounted ? "user" : "never"}>
+      {children}
+    </MotionConfig>
+  );
 }

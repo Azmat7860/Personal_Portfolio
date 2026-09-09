@@ -149,6 +149,7 @@ export default function Navigation() {
             ? "border-b border-[var(--border-subtle)] bg-[var(--nav-scrolled)] backdrop-blur-xl"
             : "bg-transparent",
         )}
+        aria-label="Primary"
       >
         <div className="container-shell flex h-18 min-w-0 items-center justify-between gap-3">
           {pathname === "/" ? (
@@ -170,26 +171,31 @@ export default function Navigation() {
             </Link>
           )}
 
-          <div className="hidden items-center gap-8 rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-5 py-3 lg:flex">
-            {navigationItems.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => goToSection(item.id)}
-                className={cn(
-                  "group relative text-sm font-medium transition-colors",
-                  pathname === "/" && activeSection === item.id
-                    ? "text-[var(--text-primary)]"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
-                )}
-              >
-                {item.label}
-                <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
-                {pathname === "/" && activeSection === item.id ? (
-                  <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
-                ) : null}
-              </button>
-            ))}
+          <div className="hidden items-center gap-3.5 rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-3.5 py-2 xl:gap-6 xl:px-5 xl:py-3 lg:flex">
+            {navigationItems.map((item) => {
+              const isActive = pathname === "/" && activeSection === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => goToSection(item.id)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "group relative whitespace-nowrap text-[0.78rem] font-medium transition-colors xl:text-sm",
+                    isActive
+                      ? "text-[var(--text-primary)]"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
+                  )}
+                >
+                  {item.label}
+                  <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
+                  {isActive ? (
+                    <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
+                  ) : null}
+                </button>
+              );
+            })}
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
@@ -221,6 +227,9 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
           >
             <div className="mx-auto flex h-full max-w-lg flex-col">
               <div className="flex items-center justify-between">

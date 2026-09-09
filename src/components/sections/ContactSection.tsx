@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import {
   ChangeEvent,
   FormEvent,
@@ -92,6 +93,7 @@ function RequiredLabel({
 }
 
 export default function ContactSection() {
+  const shouldReduceMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState(initialFormState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -219,12 +221,13 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 22 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 22 }}
-            className={`fixed right-4 top-4 z-[200] flex w-[min(92vw,27rem)] gap-3 rounded-xl border p-4 shadow-2xl backdrop-blur-xl transition-all duration-150 ${
+            className={`fixed right-4 top-20 z-[200] flex w-[min(92vw,27rem)] gap-3 rounded-xl border p-4 shadow-2xl backdrop-blur-xl transition-all duration-150 sm:top-4 ${
               toast.type === "success"
                 ? "border-emerald-400/30 bg-emerald-950/90 text-white"
                 : "border-red-400/30 bg-red-950/90 text-white"
             }`}
             role="status"
+            aria-live="polite"
           >
             <div
               className={`mt-0.5 ${
@@ -329,7 +332,7 @@ export default function ContactSection() {
                         type="button"
                         onClick={handleCopy}
                         className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)] sm:size-9"
-                        aria-label="Copy email address"
+                        aria-label="Copy email"
                       >
                         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
                       </button>
@@ -342,10 +345,10 @@ export default function ContactSection() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.35 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.35 }}
           className="min-w-0 max-w-full rounded-xl border border-[var(--border-default)] bg-[var(--form-surface)] p-4 shadow-[0_16px_48px_rgba(0,0,0,0.28)] sm:p-5 md:p-6"
         >
           <form className="min-w-0 space-y-4" onSubmit={handleSubmit}>
@@ -377,12 +380,7 @@ export default function ContactSection() {
               />
             </div>
             <div className="min-w-0">
-              <label
-                htmlFor="subject"
-                className="mb-2 block text-sm text-[var(--text-secondary)]"
-              >
-                Subject
-              </label>
+              <RequiredLabel htmlFor="subject">Subject</RequiredLabel>
               <input
                 id="subject"
                 name="subject"
