@@ -29,7 +29,7 @@ export default function SkillsSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
           {skillCategories.map((category, index) => {
             const Icon = iconMap[category.icon as keyof typeof iconMap];
 
@@ -41,9 +41,9 @@ export default function SkillsSection() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.06 }}
                 whileHover={shouldReduceMotion ? undefined : { y: -8, scale: 1.01 }}
-                className="surface-panel rounded-[1.75rem] border border-white/8 p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
+                className="surface-panel rounded-[1.75rem] border border-[var(--border-subtle)] p-6 hover:-translate-y-1 hover:border-[var(--border-accent)]"
               >
-                <div className="mb-5 inline-flex size-11 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[var(--accent-cyan)]">
+                <div className="mb-5 inline-flex size-11 items-center justify-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] text-[var(--accent-cyan)]">
                   <Icon className="size-5" />
                 </div>
                 <h3 className="font-[family-name:var(--font-outfit)] text-xl font-semibold">
@@ -66,7 +66,7 @@ export default function SkillsSection() {
           })}
         </div>
 
-        <div className="ticker-mask mt-12 overflow-hidden rounded-full border border-white/8 bg-white/[0.02] px-0 py-4">
+        <div className="ticker-mask mt-8 overflow-hidden rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-0 py-3.5">
           <div
             className="flex min-w-max gap-8 font-mono text-sm text-[var(--text-muted)]"
             style={{ animation: shouldReduceMotion ? undefined : "marquee 60s linear infinite" }}

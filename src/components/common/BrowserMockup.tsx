@@ -6,7 +6,7 @@ export default function BrowserMockup({
   title: string;
 }) {
   return (
-    <div className="surface-panel relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-white/10 bg-[var(--bg-surface)] md:aspect-[15/11]">
+    <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#0a0a14] shadow-[var(--shadow-card)] md:aspect-[15/11]">
       <div className="flex items-center gap-2 border-b border-white/8 px-4 py-3">
         <span className="size-2 rounded-full bg-[#f87171]" />
         <span className="size-2 rounded-full bg-[#fbbf24]" />
@@ -22,7 +22,7 @@ export default function BrowserMockup({
         />
         <div className="relative flex h-full min-h-0 flex-col rounded-2xl border border-white/10 bg-black/20 p-4 backdrop-blur-sm md:p-5">
           <div className="space-y-3">
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-code)]">
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[#7ecfff]">
               deployed system
             </p>
             <h4 className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap font-[family-name:var(--font-outfit)] text-[1.15rem] font-semibold tracking-[-0.035em] text-white md:text-[1.45rem]">

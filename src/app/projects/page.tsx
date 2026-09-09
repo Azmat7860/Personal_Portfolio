@@ -38,12 +38,12 @@ export default function ProjectsPage() {
           <div className="max-w-3xl">
             <p className="section-kicker">Projects</p>
             <h1 className="section-heading">Projects I&apos;ve Built</h1>
-            <p className="mt-5 text-lg leading-8 text-[var(--text-secondary)]">
+            <p className="mt-2 text-lg leading-8 text-[var(--text-secondary)]">
               A closer look at the products and platforms I have worked on.
             </p>
             <SectionLink
               sectionId="projects"
-              className="mt-8 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white hover:-translate-y-1 hover:border-[var(--border-accent)]"
+              className="mt-8 inline-flex rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
             >
               Back to Home
             </SectionLink>
@@ -65,16 +65,26 @@ export default function ProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.35 }}
-                className="surface-panel relative overflow-hidden rounded-[2rem] border border-white/8 p-6 md:p-8"
+                className="surface-panel relative overflow-hidden rounded-[2rem] border border-[var(--border-subtle)] p-6 md:p-8"
                 style={{ background: project.gradient }}
               >
-                <div className="absolute inset-0 bg-[rgba(8,8,16,0.78)]" />
-                <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "var(--overlay-scrim)" }}
+                />
+                <div
+                  className="absolute inset-0 opacity-80"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, var(--project-card-glow), transparent 55%)",
+                  }}
+                />
+                <div className="relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8">
                   <div>
                     <p className="font-mono text-sm uppercase tracking-[0.26em] text-[var(--text-code)]">
                       {project.number} · {project.tagline}
                     </p>
-                    <h2 className="mt-4 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-[-0.04em] text-white">
+                    <h2 className="mt-4 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-[-0.04em] text-[var(--text-primary)]">
                       {project.name}
                     </h2>
                     <p className="mt-4 max-w-2xl leading-8 text-[var(--text-secondary)]">
@@ -122,7 +132,7 @@ export default function ProjectsPage() {
                                 ? "noopener noreferrer"
                                 : undefined
                             }
-                            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[var(--text-primary)] hover:border-white/20"
+                            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-2 text-[var(--text-primary)] shadow-sm hover:border-[var(--border-accent)]"
                           >
                             {key === "live" ? "Visit Site" : "GitHub"}
                             <ArrowUpRight className="size-4" />

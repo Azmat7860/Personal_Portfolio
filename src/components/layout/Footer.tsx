@@ -14,9 +14,9 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-white/8 bg-[linear-gradient(180deg,transparent,rgba(10,10,20,0.9))]">
-      <div className="container-shell py-10">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+    <footer className="relative border-t border-[var(--border-subtle)] bg-[linear-gradient(180deg,transparent,var(--footer-fade))]">
+      <div className="container-shell py-8 md:py-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="font-[family-name:var(--font-outfit)] text-xl font-semibold">
               {personal.name}
@@ -33,7 +33,7 @@ export default function Footer() {
                 <SectionLink
                   key={item.id}
                   sectionId={item.id}
-                  className="cursor-pointer hover:text-white"
+                  className="cursor-pointer hover:text-[var(--text-primary)]"
                 >
                   {item.label}
                 </SectionLink>
@@ -55,7 +55,7 @@ export default function Footer() {
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={item.label}
-                    className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-secondary)] hover:border-white/20 hover:text-white"
+                    className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] text-[var(--text-secondary)] hover:border-[var(--border-hover)] hover:text-[var(--text-primary)]"
                   >
                     <Icon className="size-4" />
                   </a>
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 border-t border-white/8 pt-4 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Azmat Ullah Khan. All rights reserved.</p>
           <p>{personal.email} · {personal.phone}</p>
         </div>

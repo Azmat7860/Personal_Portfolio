@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
+import ThemeToggle from "@/components/common/ThemeToggle";
 import Tooltip from "@/components/common/Tooltip";
 import { navigationItems, personal, socialLinks } from "@/data/personal";
 import { cn } from "@/lib/utils";
@@ -121,15 +122,15 @@ export default function Navigation() {
 
   const brandMark = (
     <>
-      <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
-        <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[rgba(4,4,10,0.92)]" />
-        <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-white">
+      <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
+        <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[var(--brand-mark-bg)]" />
+        <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-[var(--text-primary)]">
           A
           <span className="-ml-1 accent-text">K</span>
         </span>
       </span>
       <span className="hidden flex-col text-left md:flex">
-        <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-white">
+        <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-[var(--text-primary)]">
           Azmat Ullah Khan
         </span>
         <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-muted)]">
@@ -145,7 +146,7 @@ export default function Navigation() {
         className={cn(
           "fixed inset-x-0 top-0 z-[100] transition-all duration-300",
           scrolled
-            ? "border-b border-white/8 bg-[rgba(4,4,10,0.82)] backdrop-blur-xl"
+            ? "border-b border-[var(--border-subtle)] bg-[var(--nav-scrolled)] backdrop-blur-xl"
             : "bg-transparent",
         )}
       >
@@ -169,7 +170,7 @@ export default function Navigation() {
             </Link>
           )}
 
-          <div className="hidden items-center gap-8 rounded-full border border-white/8 bg-white/[0.02] px-5 py-3 lg:flex">
+          <div className="hidden items-center gap-8 rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-5 py-3 lg:flex">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
@@ -192,20 +193,24 @@ export default function Navigation() {
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <div className="rounded-full border border-[var(--border-default)] bg-white/[0.02] px-4 py-2 text-xs text-[var(--text-secondary)] shadow-[var(--shadow-glow)]">
+            <ThemeToggle />
+            <div className="rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] px-4 py-2 text-xs text-[var(--text-secondary)] shadow-[var(--shadow-glow)]">
               <span className="mr-2 inline-block size-2 rounded-full bg-[var(--accent-emerald)]" />
               Available
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-primary)] lg:hidden"
-            aria-label="Open navigation menu"
-          >
-            <Menu className="size-5" />
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex size-11 items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] text-[var(--text-primary)]"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="size-5" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -230,7 +235,7 @@ export default function Navigation() {
                 <button
                   type="button"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+                  className="inline-flex size-11 items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)]"
                   aria-label="Close navigation menu"
                 >
                   <X className="size-5" />
@@ -254,7 +259,7 @@ export default function Navigation() {
                   ))}
                 </div>
 
-                <div className="border-t border-white/8 pt-8">
+                <div className="border-t border-[var(--border-subtle)] pt-8">
                   <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--text-muted)]">
                     Connect
                   </p>
@@ -272,7 +277,7 @@ export default function Navigation() {
                               ? "noopener noreferrer"
                               : undefined
                           }
-                          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 px-4 py-2 hover:border-[var(--border-accent)] hover:text-white"
+                          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-default)] px-4 py-2 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
                         >
                           {Icon ? (
                             <Tooltip label={link.label}>

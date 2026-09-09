@@ -18,8 +18,8 @@ export default function ProjectFilterBar({
           onClick={() => onChange(filter.id)}
           className={`rounded-full px-4 py-2 text-sm ${
             activeFilter === filter.id
-              ? "text-black"
-              : "border border-white/10 bg-white/[0.03] text-[var(--text-secondary)]"
+              ? "text-[var(--cta-ink)]"
+              : "border border-[var(--border-default)] bg-[var(--panel-muted)] text-[var(--text-secondary)]"
           }`}
           style={
             activeFilter === filter.id

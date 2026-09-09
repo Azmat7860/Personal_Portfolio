@@ -221,8 +221,8 @@ export default function ContactSection() {
             exit={{ opacity: 0, x: 22 }}
             className={`fixed right-4 top-4 z-[200] flex w-[min(92vw,27rem)] gap-3 rounded-xl border p-4 shadow-2xl backdrop-blur-xl transition-all duration-150 ${
               toast.type === "success"
-                ? "border-emerald-400/30 bg-emerald-950/85"
-                : "border-red-400/30 bg-red-950/85"
+                ? "border-emerald-400/30 bg-emerald-950/90 text-white"
+                : "border-red-400/30 bg-red-950/90 text-white"
             }`}
             role="status"
           >
@@ -255,17 +255,17 @@ export default function ContactSection() {
         ) : null}
       </AnimatePresence>
 
-      <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+      <div className="container-shell relative z-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-8">
         <div className="max-w-2xl">
           <p className="section-kicker">Contact</p>
-          <h2 className="font-[family-name:var(--font-outfit)] text-4xl font-bold leading-tight tracking-normal text-white md:text-5xl">
+          <h2 className="font-[family-name:var(--font-outfit)] text-4xl font-bold leading-tight tracking-normal text-[var(--text-primary)] md:text-5xl">
             Let&apos;s Build Something
           </h2>
           <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-secondary)] md:text-lg">
             Open for full-time roles, contract work, and remote product opportunities.
           </p>
 
-          <div className="mt-8 rounded-xl border border-white/8 bg-white/[0.025] p-3">
+          <div className="mt-8 rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] p-3">
             {contactLinks.map((item) => {
               const Icon = item.icon;
               const isEmail = item.type === "copy";
@@ -285,7 +285,7 @@ export default function ContactSection() {
                     <span className="block text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
                       {item.label}
                     </span>
-                    <span className="mt-1 block truncate text-sm text-[var(--text-secondary)] transition-colors duration-150 group-hover:text-white md:text-base">
+                    <span className="mt-1 block truncate text-sm text-[var(--text-secondary)] transition-colors duration-150 group-hover:text-[var(--text-primary)] md:text-base">
                       {item.value}
                     </span>
                   </span>
@@ -299,11 +299,11 @@ export default function ContactSection() {
                       href={item.href}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="group flex w-full cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-white/[0.04]"
+                      className="group flex w-full cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)]"
                     >
                       {rowContent}
                       {isExternal ? (
-                        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 text-[var(--text-secondary)] transition-all duration-150 group-hover:border-[var(--border-accent)] group-hover:text-[var(--accent-cyan)]">
+                        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 group-hover:border-[var(--border-accent)] group-hover:text-[var(--accent-cyan)]">
                           <ExternalLink className="size-4" />
                         </span>
                       ) : null}
@@ -315,7 +315,7 @@ export default function ContactSection() {
               return (
                 <div
                   key={item.label}
-                  className="group flex items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-white/[0.04]"
+                  className="group flex items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)]"
                 >
                   {rowContent}
                   {isEmail ? (
@@ -323,7 +323,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={handleCopy}
-                        className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-white"
+                        className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
                         aria-label="Copy email address"
                       >
                         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
@@ -341,7 +341,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.35 }}
-          className="rounded-xl border border-white/10 bg-[#0d0d18] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.28)] md:p-6"
+          className="rounded-xl border border-[var(--border-default)] bg-[var(--form-surface)] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.28)] md:p-6"
         >
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
@@ -354,7 +354,7 @@ export default function ContactSection() {
                 value={form.name}
                 onChange={handleFieldChange}
                 placeholder="Your full name"
-                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
             <div>
@@ -368,7 +368,7 @@ export default function ContactSection() {
                 value={form.email}
                 onChange={handleFieldChange}
                 placeholder="you@example.com"
-                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
             <div>
@@ -386,7 +386,7 @@ export default function ContactSection() {
                 value={form.subject}
                 onChange={handleFieldChange}
                 placeholder="Project, role, or inquiry subject"
-                className="w-full rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
             <div>
@@ -400,7 +400,7 @@ export default function ContactSection() {
                 value={form.message}
                 onChange={handleFieldChange}
                 placeholder="Tell me what you would like to build or discuss..."
-                className="thin-scrollbar w-full resize-none rounded-lg border border-white/10 bg-[#11111f] px-4 py-3 text-white outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="thin-scrollbar w-full resize-none rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
 
@@ -417,7 +417,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={isSending || !isFormValid}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 font-medium text-black shadow-[0_0_28px_rgba(0,212,255,0.14)] transition-all duration-150 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 font-medium text-[var(--cta-ink)] shadow-[0_0_28px_rgba(0,212,255,0.14)] transition-all duration-150 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
                 style={{
                   background: status === "success" ? "#10B981" : "var(--gradient-accent)",
                 }}

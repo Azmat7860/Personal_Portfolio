@@ -37,11 +37,11 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-6">
           <ProjectFilterBar activeFilter={activeFilter} onChange={setActiveFilter} />
         </div>
 
-        <div className="mt-10 space-y-8">
+        <div className="mt-8 space-y-6 md:space-y-8">
           <AnimatePresence mode="popLayout">
             {previewProjects.map((project) => (
               <motion.article
@@ -52,20 +52,30 @@ export default function ProjectsSection() {
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.4 }}
                 whileHover={{ y: -6, scale: 1.008 }}
-                className="surface-panel relative overflow-hidden rounded-[2rem] border border-white/8 p-6 md:p-8"
+                className="surface-panel relative overflow-hidden rounded-[2rem] border border-[var(--border-subtle)] p-6 md:p-8"
                 style={{ background: project.gradient }}
               >
-                <div className="absolute inset-0 bg-[rgba(8,8,16,0.78)]" />
-                <div className="absolute left-4 top-0 font-[family-name:var(--font-outfit)] text-[7rem] font-bold leading-none text-white/5 md:text-[10rem]">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "var(--overlay-scrim)" }}
+                />
+                <div
+                  className="absolute inset-0 opacity-80"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, var(--project-card-glow), transparent 55%)",
+                  }}
+                />
+                <div className="absolute left-4 top-0 font-[family-name:var(--font-outfit)] text-[7rem] font-bold leading-none text-[var(--text-primary)]/5 md:text-[10rem]">
                   {project.number}
                 </div>
 
-                <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div className="relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8">
                   <div>
                     <p className="font-mono text-sm uppercase tracking-[0.26em] text-[var(--text-code)]">
                       {project.tagline}
                     </p>
-                    <h3 className="mt-4 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-[-0.04em]">
+                    <h3 className="mt-4 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-[-0.04em] text-[var(--text-primary)]">
                       {project.name}
                     </h3>
                     <p className="mt-4 max-w-2xl leading-8 text-[var(--text-secondary)]">
@@ -107,7 +117,7 @@ export default function ProjectsSection() {
                           <a
                             key={key}
                             href={href}
-                            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[var(--text-primary)] hover:border-white/20"
+                            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-2 text-[var(--text-primary)] shadow-sm hover:border-[var(--border-accent)]"
                           >
                             {key === "live"
                               ? "Visit Site"
@@ -131,7 +141,7 @@ export default function ProjectsSection() {
           <div className="mt-6 flex justify-center">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-white hover:-translate-y-1 hover:border-[var(--border-accent)]"
+              className="inline-flex items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
             >
               View All Projects
             </Link>
