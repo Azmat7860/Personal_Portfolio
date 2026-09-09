@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Lightbulb, Target, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Lightbulb, Target, TrendingUp } from "lucide-react";
 import { useMemo, useState } from "react";
 import BrowserMockup from "@/components/common/BrowserMockup";
 import CustomCursor from "@/components/common/CustomCursor";
@@ -43,8 +43,9 @@ export default function ProjectsPage() {
             </p>
             <SectionLink
               sectionId="projects"
-              className="mt-8 inline-flex rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
+              className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
             >
+              <ArrowLeft className="size-4" />
               Back to Home
             </SectionLink>
           </div>

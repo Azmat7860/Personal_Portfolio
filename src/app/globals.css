@@ -46,10 +46,17 @@
   --body-glow-b: rgba(139, 92, 246, 0.08);
   --shimmer-bright: rgba(255, 255, 255, 0.98);
   --cta-ink: #050712;
-  --mock-well: rgba(0, 0, 0, 0.2);
+  --mock-frame: #0a0a14;
+  --mock-chrome-border: rgba(255, 255, 255, 0.08);
+  --mock-url: rgba(255, 255, 255, 0.03);
+  --mock-well: rgba(0, 0, 0, 0.22);
+  --mock-well-border: rgba(255, 255, 255, 0.1);
+  --mock-title: #ffffff;
+  --mock-card: rgba(255, 255, 255, 0.06);
+  --mock-card-border: rgba(255, 255, 255, 0.1);
   --mock-line: rgba(255, 255, 255, 0.1);
   --mock-line-strong: rgba(255, 255, 255, 0.15);
-  --mock-muted: rgba(255, 255, 255, 0.6);
+  --mock-label: rgba(255, 255, 255, 0.6);
   --section-y-mobile: 1.75rem;
   --section-y-tablet: 2rem;
   --section-y-desktop: 2.25rem;
@@ -96,10 +103,17 @@ html[data-theme="light"] {
   --body-glow-b: rgba(124, 58, 237, 0.08);
   --shimmer-bright: rgba(15, 23, 42, 0.92);
   --cta-ink: #ffffff;
-  --mock-well: rgba(15, 23, 42, 0.04);
+  --mock-frame: #f8fafc;
+  --mock-chrome-border: rgba(15, 23, 42, 0.1);
+  --mock-url: rgba(15, 23, 42, 0.06);
+  --mock-well: rgba(255, 255, 255, 0.72);
+  --mock-well-border: rgba(15, 23, 42, 0.12);
+  --mock-title: #0f172a;
+  --mock-card: rgba(241, 245, 249, 0.95);
+  --mock-card-border: rgba(15, 23, 42, 0.1);
   --mock-line: rgba(15, 23, 42, 0.1);
   --mock-line-strong: rgba(15, 23, 42, 0.16);
-  --mock-muted: rgba(71, 85, 105, 0.85);
+  --mock-label: #64748b;
 }
 
 @theme inline {

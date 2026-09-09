@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Navigation from "@/components/layout/Navigation";
 import TechBadge from "@/components/common/TechBadge";
 import { experience } from "@/data/experience";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export default function CompaniesPage() {
   return (
@@ -22,8 +22,9 @@ export default function CompaniesPage() {
           </p>
           <SectionLink
             sectionId="work"
-            className="mt-8 inline-flex rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
+            className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)] px-5 py-3 text-sm font-medium text-[var(--text-primary)] hover:-translate-y-1 hover:border-[var(--border-accent)]"
           >
+            <ArrowLeft className="size-4" />
             Back to Home
           </SectionLink>
         </div>
