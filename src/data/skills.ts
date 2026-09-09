@@ -7,8 +7,8 @@ export const skillCategories: SkillCategory[] = [
     description: "Responsive interfaces, dashboards, and state-heavy product flows",
     icon: "Monitor",
     skills: [
-      { name: "React.js", color: "#61DAFB" },
-      { name: "Next.js", color: "#111827" },
+      { name: "React.js", color: "#22D3EE" },
+      { name: "Next.js", color: "#94A3B8" },
       { name: "TypeScript", color: "#3178C6" },
       { name: "JavaScript (ES6+)", color: "#CA8A04" },
       { name: "Redux Toolkit", color: "#764ABC" },
@@ -25,7 +25,7 @@ export const skillCategories: SkillCategory[] = [
     icon: "Server",
     skills: [
       { name: "Node.js", color: "#339933" },
-      { name: "Express.js", color: "#64748B" },
+      { name: "Express.js", color: "#475569" },
       { name: "NestJS", color: "#E0234E" },
       { name: "REST APIs", color: "#00D2FF" },
       { name: "WebSockets", color: "#10B981" },
@@ -68,10 +68,10 @@ export const skillCategories: SkillCategory[] = [
     icon: "Cloud",
     skills: [
       { name: "Git", color: "#F05032" },
-      { name: "GitHub", color: "#334155" },
+      { name: "GitHub", color: "#64748B" },
       { name: "Docker", color: "#2496ED" },
       { name: "GitHub Actions", color: "#2088FF" },
-      { name: "Vercel", color: "#111827" },
+      { name: "Vercel", color: "#94A3B8" },
       { name: "Postman", color: "#FF6C37" },
     ],
   },

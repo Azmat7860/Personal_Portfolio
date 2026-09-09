@@ -1,3 +1,6 @@
+"use client";
+
+import { useTheme } from "@/components/providers/ThemeProvider";
 import { cn } from "@/lib/utils";
 
 function parseHex(color?: string) {
@@ -20,11 +23,35 @@ function parseHex(color?: string) {
   };
 }
 
-function isLowContrastAccent(color?: string) {
+function luminance(color?: string) {
   const rgb = parseHex(color);
-  if (!rgb) return false;
-  const luminance = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
-  return luminance > 0.72;
+  if (!rgb) return null;
+  return (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+}
+
+/** Remap accents that disappear on the active background. */
+function resolveAccent(color: string | undefined, theme: "dark" | "light") {
+  if (!color) return "var(--accent-cyan)";
+
+  const lum = luminance(color);
+  if (lum === null) return color;
+
+  // Near-black / charcoal brands (Next.js, Vercel, GitHub) on dark UI
+  if (theme === "dark" && lum < 0.28) {
+    return "#94a3b8";
+  }
+
+  // Very light / icy brands (React cyan, etc.) on light UI
+  if (theme === "light" && lum > 0.72) {
+    return "#0e7490";
+  }
+
+  // Mid slate on light can look washed; deepen slightly
+  if (theme === "light" && lum > 0.45 && lum < 0.55 && color.toLowerCase() === "#64748b") {
+    return "#475569";
+  }
+
+  return color;
 }
 
 export default function TechBadge({
@@ -36,8 +63,8 @@ export default function TechBadge({
   color?: string;
   className?: string;
 }) {
-  const lowContrast = isLowContrastAccent(color);
-  const accent = lowContrast ? "#64748b" : (color ?? "var(--accent-cyan)");
+  const { theme } = useTheme();
+  const accent = resolveAccent(color, theme);
 
   return (
     <span
@@ -46,12 +73,8 @@ export default function TechBadge({
         className,
       )}
       style={{
-        borderColor: lowContrast
-          ? "var(--border-default)"
-          : `color-mix(in srgb, ${accent} 45%, transparent)`,
-        backgroundColor: lowContrast
-          ? "var(--panel-muted)"
-          : `color-mix(in srgb, ${accent} 16%, transparent)`,
+        borderColor: `color-mix(in srgb, ${accent} 42%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${accent} 14%, transparent)`,
       }}
     >
       <span

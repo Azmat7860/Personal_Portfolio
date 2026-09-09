@@ -33,7 +33,7 @@ export default function ExperienceSection() {
                 }`}
               >
                 <div className="hidden md:block" />
-                <span className="absolute left-[14px] top-8 size-3 rounded-full border-2 border-white bg-[var(--accent-cyan)] shadow-[0_0_20px_rgba(0,210,255,0.4)] md:left-1/2 md:-translate-x-1/2" />
+                <span className="absolute left-[14px] top-8 size-3 rounded-full border-2 border-[var(--bg-primary)] bg-[var(--accent-cyan)] shadow-[0_0_20px_rgba(0,210,255,0.4)] md:left-1/2 md:-translate-x-1/2" />
                 <motion.article
                   initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}

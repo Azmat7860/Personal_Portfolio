@@ -38,9 +38,10 @@ const themeInitScript = `
     const stored = localStorage.getItem(key);
     const theme = stored === "light" || stored === "dark" ? stored : "dark";
     const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
-    root.classList.toggle("light", theme === "light");
+    root.classList.remove(theme === "dark" ? "light" : "dark");
+    root.classList.add(theme);
     root.style.colorScheme = theme;
+    root.dataset.theme = theme;
   } catch (_) {}
 })();
 `;
@@ -51,11 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="dark h-full antialiased"
-    >
+    <html lang="en" suppressHydrationWarning className="h-full antialiased">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
