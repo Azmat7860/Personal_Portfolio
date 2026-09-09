@@ -37,7 +37,7 @@ export default function AboutSection() {
 
   return (
     <SectionWrapper id="about">
-      <div className="container-shell grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
+      <div className="container-shell grid min-w-0 gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
         <motion.div
           variants={staggerContainer}
           initial={shouldReduceMotion ? false : "hidden"}

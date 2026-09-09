@@ -66,7 +66,7 @@ export default function SkillsSection() {
           })}
         </div>
 
-        <div className="ticker-mask mt-8 overflow-hidden rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-0 py-3.5">
+        <div className="ticker-mask mt-8 overflow-x-hidden overflow-hidden rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-0 py-3.5">
           <div
             className="flex min-w-max gap-8 font-mono text-sm text-[var(--text-muted)]"
             style={{ animation: shouldReduceMotion ? undefined : "marquee 60s linear infinite" }}

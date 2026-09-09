@@ -51,10 +51,12 @@ export default function ExperienceSection() {
                     </h3>
                   </div>
                   <p className="mt-2 text-[var(--accent-cyan)]">{item.role}</p>
-                  <p className="mt-1 inline-flex items-center gap-2 font-mono text-sm text-[var(--text-secondary)]">
-                    <CalendarDays className="size-3.5 text-[var(--text-muted)]" />
-                    {item.period.start} → {item.period.end}
-                    {item.engagement ? ` · ${item.engagement}` : ""}
+                  <p className="mt-1 flex min-w-0 flex-wrap items-center gap-2 font-mono text-sm text-[var(--text-secondary)]">
+                    <CalendarDays className="size-3.5 shrink-0 text-[var(--text-muted)]" />
+                    <span className="min-w-0 break-words">
+                      {item.period.start} → {item.period.end}
+                      {item.engagement ? ` · ${item.engagement}` : ""}
+                    </span>
                   </p>
                   <p className="mt-5 text-[var(--text-secondary)]">{item.description}</p>
                   <ul className="mt-5 space-y-3 text-sm leading-7 text-[var(--text-secondary)]">

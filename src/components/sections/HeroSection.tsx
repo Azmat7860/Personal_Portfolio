@@ -63,17 +63,17 @@ export default function HeroSection() {
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)] lg:items-center lg:gap-10">
+      <div className="container-shell relative z-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center lg:gap-10">
         <motion.div
           variants={staggerContainer}
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView={shouldReduceMotion ? undefined : "visible"}
           viewport={{ once: true, amount: 0.35 }}
-          className="max-w-[40rem]"
+          className="min-w-0 max-w-[40rem]"
         >
           <motion.div
             variants={fadeInUp}
-            className="mb-5 inline-flex items-center gap-3 rounded-full border border-[var(--border-accent)] bg-[var(--hero-pill)] px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--text-code)]"
+            className="mb-5 inline-flex max-w-full flex-wrap items-center gap-3 rounded-full border border-[var(--border-accent)] bg-[var(--hero-pill)] px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-code)] sm:px-4 sm:text-[0.72rem] sm:tracking-[0.22em]"
           >
             <span>{personal.heroPill}</span>
             <span
@@ -86,7 +86,7 @@ export default function HeroSection() {
             <p className="mb-3 font-mono text-sm uppercase tracking-[0.32em] text-[var(--text-muted)]">
               The Engineering Room
             </p>
-            <h1 className="text-[clamp(2.25rem,8vw,4rem)] leading-none whitespace-normal sm:whitespace-nowrap">
+            <h1 className="max-w-full text-[clamp(2.1rem,9vw,4rem)] leading-none break-words">
               <GradientText className="hero-name-shimmer">
                 Azmat Ullah Khan
               </GradientText>

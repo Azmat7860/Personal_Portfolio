@@ -150,12 +150,12 @@ export default function Navigation() {
             : "bg-transparent",
         )}
       >
-        <div className="container-shell flex h-18 items-center justify-between gap-4">
+        <div className="container-shell flex h-18 min-w-0 items-center justify-between gap-3">
           {pathname === "/" ? (
             <button
               type="button"
               onClick={() => goToSection("hero")}
-              className="group relative flex items-center gap-3"
+              className="group relative flex min-w-0 items-center gap-3"
               aria-label="Go to home section"
             >
               {brandMark}
@@ -163,7 +163,7 @@ export default function Navigation() {
           ) : (
             <Link
               href="/"
-              className="group relative flex items-center gap-3"
+              className="group relative flex min-w-0 items-center gap-3"
               aria-label="Go to home"
             >
               {brandMark}
@@ -200,7 +200,7 @@ export default function Navigation() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
             <ThemeToggle />
             <button
               type="button"

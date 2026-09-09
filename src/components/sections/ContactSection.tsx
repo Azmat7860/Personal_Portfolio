@@ -34,7 +34,7 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/azmat-ullah-khan-289439237",
+    value: "linkedin.com/in/azmat-ullah-khan",
     href: personal.linkedin,
     icon: LinkedInIcon,
     type: "external",
@@ -78,7 +78,7 @@ function RequiredLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="mb-2 flex items-center gap-2 text-sm text-[var(--text-secondary)]"
+      className="mb-2 flex min-w-0 flex-wrap items-center gap-2 text-sm text-[var(--text-secondary)]"
     >
       <span>{children}</span>
       <span
@@ -255,17 +255,17 @@ export default function ContactSection() {
         ) : null}
       </AnimatePresence>
 
-      <div className="container-shell relative z-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-8">
-        <div className="max-w-2xl">
+      <div className="container-shell relative z-10 grid min-w-0 gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-8">
+        <div className="min-w-0 max-w-2xl">
           <p className="section-kicker">Contact</p>
-          <h2 className="font-[family-name:var(--font-outfit)] text-4xl font-bold leading-tight tracking-normal text-[var(--text-primary)] md:text-5xl">
+          <h2 className="font-[family-name:var(--font-outfit)] text-[clamp(2rem,8vw,3rem)] font-bold leading-tight tracking-normal text-[var(--text-primary)] md:text-5xl">
             Let&apos;s Build Something
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-secondary)] md:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:leading-8 md:text-lg">
             Open for full-time roles, contract work, and remote product opportunities.
           </p>
 
-          <div className="mt-8 rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] p-3">
+          <div className="mt-8 min-w-0 overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--panel-muted)] p-2 sm:p-3">
             {contactLinks.map((item) => {
               const Icon = item.icon;
               const isEmail = item.type === "copy";
@@ -278,14 +278,14 @@ export default function ContactSection() {
                   : "";
               const rowContent = (
                 <>
-                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-[rgba(0,212,255,0.08)] text-[var(--accent-cyan)]">
+                  <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(0,212,255,0.08)] text-[var(--accent-cyan)] sm:size-10">
                     <Icon className="size-4" />
                   </span>
-                  <span className="min-w-0 flex-1">
+                  <span className="min-w-0 flex-1 overflow-hidden">
                     <span className="block text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
                       {item.label}
                     </span>
-                    <span className="mt-1 block truncate text-sm text-[var(--text-secondary)] transition-colors duration-150 group-hover:text-[var(--text-primary)] md:text-base">
+                    <span className="mt-1 block truncate text-sm text-[var(--text-secondary)] transition-colors duration-150 group-hover:text-[var(--text-primary)] sm:text-base">
                       {item.value}
                     </span>
                   </span>
@@ -294,16 +294,21 @@ export default function ContactSection() {
 
               if (isLinked) {
                 return (
-                  <Tooltip key={item.label} label={actionTooltip} side="bottom" className="w-full">
+                  <Tooltip
+                    key={item.label}
+                    label={actionTooltip}
+                    side="bottom"
+                    className="flex w-full min-w-0 max-w-full"
+                  >
                     <a
                       href={item.href}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="group flex w-full cursor-pointer items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)]"
+                      className="group flex min-w-0 w-full max-w-full cursor-pointer items-center gap-3 rounded-lg px-2 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)] sm:gap-4 sm:px-3"
                     >
                       {rowContent}
                       {isExternal ? (
-                        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 group-hover:border-[var(--border-accent)] group-hover:text-[var(--accent-cyan)]">
+                        <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 group-hover:border-[var(--border-accent)] group-hover:text-[var(--accent-cyan)] sm:size-9">
                           <ExternalLink className="size-4" />
                         </span>
                       ) : null}
@@ -315,7 +320,7 @@ export default function ContactSection() {
               return (
                 <div
                   key={item.label}
-                  className="group flex items-center gap-4 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)]"
+                  className="group flex min-w-0 w-full max-w-full items-center gap-3 rounded-lg px-2 py-3 transition-colors duration-150 hover:bg-[var(--panel-soft)] sm:gap-4 sm:px-3"
                 >
                   {rowContent}
                   {isEmail ? (
@@ -323,7 +328,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={handleCopy}
-                        className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
+                        className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-[var(--border-default)] text-[var(--text-secondary)] transition-all duration-150 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)] sm:size-9"
                         aria-label="Copy email address"
                       >
                         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
@@ -341,10 +346,10 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.35 }}
-          className="rounded-xl border border-[var(--border-default)] bg-[var(--form-surface)] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.28)] md:p-6"
+          className="min-w-0 max-w-full rounded-xl border border-[var(--border-default)] bg-[var(--form-surface)] p-4 shadow-[0_16px_48px_rgba(0,0,0,0.28)] sm:p-5 md:p-6"
         >
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div>
+          <form className="min-w-0 space-y-4" onSubmit={handleSubmit}>
+            <div className="min-w-0">
               <RequiredLabel htmlFor="name">Full Name</RequiredLabel>
               <input
                 id="name"
@@ -354,10 +359,10 @@ export default function ContactSection() {
                 value={form.name}
                 onChange={handleFieldChange}
                 placeholder="Your full name"
-                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="box-border w-full min-w-0 max-w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-3 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-4"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <RequiredLabel htmlFor="email">Email Address</RequiredLabel>
               <input
                 id="email"
@@ -368,10 +373,10 @@ export default function ContactSection() {
                 value={form.email}
                 onChange={handleFieldChange}
                 placeholder="you@example.com"
-                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="box-border w-full min-w-0 max-w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-3 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-4"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <label
                 htmlFor="subject"
                 className="mb-2 block text-sm text-[var(--text-secondary)]"
@@ -386,10 +391,10 @@ export default function ContactSection() {
                 value={form.subject}
                 onChange={handleFieldChange}
                 placeholder="Project, role, or inquiry subject"
-                className="w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="box-border w-full min-w-0 max-w-full rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-3 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-4"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <RequiredLabel htmlFor="message">Message</RequiredLabel>
               <textarea
                 id="message"
@@ -400,12 +405,12 @@ export default function ContactSection() {
                 value={form.message}
                 onChange={handleFieldChange}
                 placeholder="Tell me what you would like to build or discuss..."
-                className="thin-scrollbar w-full resize-none rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="thin-scrollbar box-border w-full min-w-0 max-w-full resize-none rounded-lg border border-[var(--border-default)] bg-[var(--input-bg)] px-3 py-3 text-[var(--text-primary)] outline-none transition-all duration-150 placeholder:text-[var(--text-muted)] focus:border-[var(--accent-cyan)] focus:ring-2 focus:ring-[rgba(0,212,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-4"
               />
             </div>
 
             <Tooltip
-              className="w-full"
+              className="flex w-full min-w-0 max-w-full"
               label={
                 isSending
                   ? "Sending your message"
@@ -417,13 +422,13 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={isSending || !isFormValid}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 font-medium text-[var(--cta-ink)] shadow-[0_0_28px_rgba(0,212,255,0.14)] transition-all duration-150 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex w-full min-w-0 max-w-full items-center justify-center gap-2 rounded-lg px-5 py-3 font-medium text-[var(--cta-ink)] shadow-[0_0_28px_rgba(0,212,255,0.14)] transition-all duration-150 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
                 style={{
                   background: status === "success" ? "#10B981" : "var(--gradient-accent)",
                 }}
               >
                 {isSending ? "Sending..." : status === "success" ? "Message Sent" : "Send Message"}
-                <SendHorizontal className="size-4" />
+                <SendHorizontal className="size-4 shrink-0" />
               </button>
             </Tooltip>
           </form>

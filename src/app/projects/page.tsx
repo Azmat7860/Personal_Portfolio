@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   }, [activeFilter]);
 
   return (
-    <main className="min-h-screen bg-[var(--bg-primary)]">
+    <main className="min-h-screen overflow-x-clip bg-[var(--bg-primary)]">
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
@@ -79,8 +79,8 @@ export default function ProjectsPage() {
                       "linear-gradient(135deg, var(--project-card-glow), transparent 55%)",
                   }}
                 />
-                <div className="relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8">
-                  <div>
+                <div className="relative z-10 grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-8">
+                  <div className="min-w-0">
                     <p className="font-mono text-sm uppercase tracking-[0.26em] text-[var(--text-code)]">
                       {project.number} · {project.tagline}
                     </p>

@@ -9,7 +9,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function CompaniesPage() {
   return (
-    <main className="min-h-screen bg-[var(--bg-primary)]">
+    <main className="min-h-screen overflow-x-clip bg-[var(--bg-primary)]">
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
@@ -34,8 +34,8 @@ export default function CompaniesPage() {
               key={item.id}
               className="surface-panel rounded-[2rem] border border-[var(--border-subtle)] p-6 md:p-8"
             >
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-                <div className="max-w-3xl">
+              <div className="flex min-w-0 flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                <div className="min-w-0 max-w-3xl">
                   <h2 className="font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-[-0.04em]">
                     {item.company}
                   </h2>
