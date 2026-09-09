@@ -7,13 +7,13 @@ export const projects: Project[] = [
     name: "HighGear Platform",
     tagline: "Enterprise Analytics SaaS",
     description:
-      "Enterprise analytics platform with separate user and admin portals for KPI dashboards, AI-generated insights, and role-based access.",
+      "Enterprise analytics platform with separate user and admin portals, providing KPI dashboards, AI-generated insights, and role-based access.",
     challenge:
       "The product needed live KPI reporting, admin controls, and secure access across multiple user types without becoming hard to maintain.",
     solution:
-      "Built it with Next.js, TypeScript, and Supabase PostgreSQL. Used Recharts and TanStack Table for dashboards, and OpenAI for data summaries.",
+      "Developed the platform using Next.js, TypeScript, and Supabase PostgreSQL, building dashboards with Recharts and TanStack Table and integrating OpenAI for data summaries.",
     impact:
-      "Gave teams clearer analytics, AI-assisted insights, and more reliable reporting across both the app and admin portal.",
+      "Delivered clearer analytics, AI-assisted insights, and more reliable reporting across both the app and admin portal.",
     tech: [
       "Next.js",
       "TypeScript",
@@ -39,11 +39,11 @@ export const projects: Project[] = [
     name: "Knowly Platform",
     tagline: "AI-Powered Homeschool EdTech SaaS",
     description:
-      "AI-powered homeschool platform with a child-facing learning kiosk and a mobile-first parent portal for sessions, progress, and reporting.",
+      "AI-powered homeschool platform with a child-facing learning kiosk and a mobile-first parent portal for session tracking, lesson progress, and reporting.",
     challenge:
       "Families needed adaptive lessons for kids plus a simple parent view for tracking sessions and learning progress.",
     solution:
-      "Built the kiosk with Electron and the parent portal with Next.js and TypeScript. Used Supabase PostgreSQL, Deno Edge Functions with RLS, and OpenAI for adaptive lessons and prompts.",
+      "Developed the kiosk with Electron and the parent portal with Next.js and TypeScript, using Supabase PostgreSQL and Deno Edge Functions with RLS, and integrating OpenAI for adaptive lessons and conversation prompts.",
     impact:
       "Connected the learning experience for children with clearer parent visibility and AI-assisted lesson flows.",
     tech: [
@@ -70,11 +70,11 @@ export const projects: Project[] = [
     name: "Kalpa AI",
     tagline: "AI-Powered SaaS Platform",
     description:
-      "Role-based dashboard for an AI SaaS platform, with different interfaces and workflows for multiple user types.",
+      "Role-based dashboard for an AI SaaS platform with different interfaces and workflows for multiple types of users.",
     challenge:
       "The product needed clear frontend architecture for role-specific dashboards, auth flows, and AI analytics that still felt usable.",
     solution:
-      "Built with Next.js, React.js, and TypeScript. Used Redux Toolkit for state, Tailwind CSS and shadcn/ui for the UI, and AWS Amplify for auth, MFA, and sessions.",
+      "Developed the platform with Next.js, React, and TypeScript, using Redux Toolkit for state management, shadcn/ui and Recharts for the interface and visualizations, and AWS Amplify (Cognito) for authentication, MFA, and session management.",
     impact:
       "Made role-based dashboards and secure auth flows easier to use across different AI product workflows.",
     tech: [
@@ -99,13 +99,13 @@ export const projects: Project[] = [
     name: "Therapist Assessment System",
     tagline: "Role-Based Clinical Evaluation Platform",
     description:
-      "Clinical assessment platform for Admins, Participants, and Raters to manage video assessments and structured feedback.",
+      "Clinical assessment platform for Admins, Participants, and Raters to manage video assessments and provide structured feedback.",
     challenge:
       "Admins needed a structured way to handle assessments, video review assignments, and consolidated evaluation exports.",
     solution:
-      "Built with React.js, Node.js, Express.js, and MongoDB with Mongoose. Used Tailwind CSS for a clean, role-aware UI across Admins, Participants, and Raters.",
+      "Developed the platform with React.js, Node.js, Express.js, and MongoDB, using Redux for state management and ExcelJS to generate consolidated multi-sheet evaluation reports.",
     impact:
-      "Made assessment workflows clearer and gave admins a structured way to manage evaluations and feedback.",
+      "Made assessment workflows clearer and gave admins downloadable multi-sheet evaluation reports.",
     tech: [
       "React.js",
       "Node.js",

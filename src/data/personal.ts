@@ -36,11 +36,11 @@ export const personal = {
     "Delivering secure full-stack applications",
   ],
   intro:
-    "Full Stack MERN Developer with 3+ years building production web apps. I work with React, Next.js, TypeScript, and Node.js, and ship secure APIs, RBAC, and AI-powered features end to end.",
+    "Full Stack MERN Developer with 3+ years of experience building scalable, production-ready web applications. I work with MongoDB, Express.js, React.js, Node.js, TypeScript, Next.js, REST APIs, authentication, RBAC, and AI-powered features, with a focus on clean architecture, performance, and end-to-end delivery.",
   about: [
-    "I'm Azmat Ullah Khan, a Full Stack Software Engineer with 3+ years of experience building production-ready web applications. I work across the stack: responsive React and Next.js frontends, secure Node.js and NestJS services, and data layers in MongoDB, PostgreSQL, and Supabase. Lately a lot of my work also includes AI-powered product features like OpenAI integrations, RAG workflows, and agent-style tooling.",
-    "At Tech Crusades, I lead full-stack development of enterprise SaaS products using Next.js, TypeScript, and Supabase. Day to day that means application architecture, RBAC, KPI dashboards, reusable UI systems, CI/CD with GitHub Actions, Vercel deployments, and OpenAI-powered insights inside real product flows.",
-    "Before that, at Mercury Sols, Earendel Technologies, and DanZee Tech, I built and maintained production MERN and NestJS applications. That work covered customer and vendor platforms, booking products, real-time features, JWT authentication, RBAC, and payment integrations. I care about clean architecture, responsive UI, and shipping features that actually help the business.",
+    "I'm Azmat Ullah Khan, a Full Stack Software Engineer with 3+ years of experience building scalable, production-ready web applications. I'm proficient in MongoDB, Express.js, React.js, Node.js, TypeScript, Next.js, REST APIs, authentication, and RBAC, and I also ship AI-powered features with a focus on clean architecture, performance, and end-to-end delivery.",
+    "At Tech Crusades, I lead full-stack development of enterprise SaaS applications using Next.js, TypeScript, and Supabase. That covers application architecture, RBAC, KPI dashboards with Recharts and TanStack Table, reusable UI with shadcn/ui and Redux Toolkit, OpenAI-powered features, and CI/CD through GitHub Actions and Vercel.",
+    "Before that, at Mercury Sols, Earendel Technologies, and DanZee Tech, I built and maintained production MERN and NestJS applications. That work covered customer and vendor platforms, booking products, real-time features, JWT authentication, RBAC, and payment integrations.",
   ],
   education: {
     degree: "Bachelor of Science in Computer Science",

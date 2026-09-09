@@ -1,32 +1,33 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { fadeInUp } from "@/lib/animations";
 import { cn } from "@/lib/utils";
-import { useInView } from "@/hooks/useInView";
+
+type SectionWrapperProps = {
+  children: React.ReactNode;
+  id: string;
+  className?: string;
+};
 
 export default function SectionWrapper({
   children,
   id,
   className,
-}: {
-  children: React.ReactNode;
-  id: string;
-  className?: string;
-}) {
-  const { ref, isInView } = useInView<HTMLElement>(0.1, true);
+}: SectionWrapperProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <motion.section
-      id={id}
-      ref={ref}
-      className={cn("relative py-14 md:py-18 lg:py-22", className)}
-      initial={shouldReduceMotion ? false : "hidden"}
-      animate={shouldReduceMotion ? undefined : isInView ? "visible" : "hidden"}
-      variants={fadeInUp}
-    >
-      {children}
-    </motion.section>
+    <section id={id} className={cn("section-y relative", className)}>
+      <motion.div
+        initial={false}
+        whileInView={
+          shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
+        }
+        viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+    </section>
   );
 }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GitHubIcon, LinkedInIcon } from "@/components/common/BrandIcons";
+import ThemeToggle from "@/components/common/ThemeToggle";
 import Tooltip from "@/components/common/Tooltip";
 import { navigationItems, personal, socialLinks } from "@/data/personal";
 import { cn } from "@/lib/utils";
@@ -121,15 +122,15 @@ export default function Navigation() {
 
   const brandMark = (
     <>
-      <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
-        <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[rgba(4,4,10,0.92)]" />
-        <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-white">
+      <span className="relative inline-flex size-12 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[linear-gradient(135deg,rgba(0,210,255,0.26),rgba(139,92,246,0.22))] shadow-[0_0_32px_rgba(0,210,255,0.14)]">
+        <span className="absolute inset-px rounded-[calc(1rem-1px)] bg-[var(--brand-mark-bg)]" />
+        <span className="relative font-[family-name:var(--font-outfit)] text-lg font-bold tracking-[-0.08em] text-[var(--text-primary)]">
           A
           <span className="-ml-1 accent-text">K</span>
         </span>
       </span>
       <span className="hidden flex-col text-left md:flex">
-        <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-white">
+        <span className="font-[family-name:var(--font-outfit)] text-base font-semibold tracking-[-0.03em] text-[var(--text-primary)]">
           Azmat Ullah Khan
         </span>
         <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-[var(--text-muted)]">
@@ -145,16 +146,17 @@ export default function Navigation() {
         className={cn(
           "fixed inset-x-0 top-0 z-[100] transition-all duration-300",
           scrolled
-            ? "border-b border-white/8 bg-[rgba(4,4,10,0.82)] backdrop-blur-xl"
+            ? "border-b border-[var(--border-subtle)] bg-[var(--nav-scrolled)] backdrop-blur-xl"
             : "bg-transparent",
         )}
+        aria-label="Primary"
       >
-        <div className="container-shell flex h-18 items-center justify-between gap-4">
+        <div className="container-shell flex h-18 min-w-0 items-center justify-between gap-3">
           {pathname === "/" ? (
             <button
               type="button"
               onClick={() => goToSection("hero")}
-              className="group relative flex items-center gap-3"
+              className="group relative flex min-w-0 items-center gap-3"
               aria-label="Go to home section"
             >
               {brandMark}
@@ -162,50 +164,59 @@ export default function Navigation() {
           ) : (
             <Link
               href="/"
-              className="group relative flex items-center gap-3"
+              className="group relative flex min-w-0 items-center gap-3"
               aria-label="Go to home"
             >
               {brandMark}
             </Link>
           )}
 
-          <div className="hidden items-center gap-8 rounded-full border border-white/8 bg-white/[0.02] px-5 py-3 lg:flex">
-            {navigationItems.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => goToSection(item.id)}
-                className={cn(
-                  "group relative text-sm font-medium transition-colors",
-                  pathname === "/" && activeSection === item.id
-                    ? "text-[var(--text-primary)]"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
-                )}
-              >
-                {item.label}
-                <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
-                {pathname === "/" && activeSection === item.id ? (
-                  <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
-                ) : null}
-              </button>
-            ))}
+          <div className="hidden items-center gap-3.5 rounded-full border border-[var(--border-subtle)] bg-[var(--panel-muted)] px-3.5 py-2 xl:gap-6 xl:px-5 xl:py-3 lg:flex">
+            {navigationItems.map((item) => {
+              const isActive = pathname === "/" && activeSection === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => goToSection(item.id)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "group relative whitespace-nowrap text-[0.78rem] font-medium transition-colors xl:text-sm",
+                    isActive
+                      ? "text-[var(--text-primary)]"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
+                  )}
+                >
+                  {item.label}
+                  <span className="absolute left-1/2 top-full mt-2 h-px w-0 -translate-x-1/2 bg-[var(--accent-cyan)] transition-all duration-300 group-hover:w-full" />
+                  {isActive ? (
+                    <span className="absolute left-1/2 top-full mt-4 size-1.5 -translate-x-1/2 rounded-full bg-[var(--accent-cyan)]" />
+                  ) : null}
+                </button>
+              );
+            })}
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <div className="rounded-full border border-[var(--border-default)] bg-white/[0.02] px-4 py-2 text-xs text-[var(--text-secondary)] shadow-[var(--shadow-glow)]">
+            <ThemeToggle />
+            <div className="rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] px-4 py-2 text-xs text-[var(--text-secondary)] shadow-[var(--shadow-glow)]">
               <span className="mr-2 inline-block size-2 rounded-full bg-[var(--accent-emerald)]" />
               Available
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[var(--text-primary)] lg:hidden"
-            aria-label="Open navigation menu"
-          >
-            <Menu className="size-5" />
-          </button>
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex size-11 items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-muted)] text-[var(--text-primary)]"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="size-5" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -216,6 +227,9 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
           >
             <div className="mx-auto flex h-full max-w-lg flex-col">
               <div className="flex items-center justify-between">
@@ -230,7 +244,7 @@ export default function Navigation() {
                 <button
                   type="button"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+                  className="inline-flex size-11 items-center justify-center rounded-full border border-[var(--border-default)] bg-[var(--panel-soft)]"
                   aria-label="Close navigation menu"
                 >
                   <X className="size-5" />
@@ -254,7 +268,7 @@ export default function Navigation() {
                   ))}
                 </div>
 
-                <div className="border-t border-white/8 pt-8">
+                <div className="border-t border-[var(--border-subtle)] pt-8">
                   <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-[var(--text-muted)]">
                     Connect
                   </p>
@@ -272,7 +286,7 @@ export default function Navigation() {
                               ? "noopener noreferrer"
                               : undefined
                           }
-                          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 px-4 py-2 hover:border-[var(--border-accent)] hover:text-white"
+                          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border-default)] px-4 py-2 hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
                         >
                           {Icon ? (
                             <Tooltip label={link.label}>
