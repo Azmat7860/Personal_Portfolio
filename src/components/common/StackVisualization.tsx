@@ -38,7 +38,7 @@ export default function StackVisualization() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="surface-panel relative hidden w-full max-w-[392px] overflow-hidden rounded-[2rem] border border-[var(--border-default)] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.12),transparent_40%),var(--stack-panel)] p-5 lg:block">
+    <div className="surface-panel relative w-full overflow-hidden rounded-[2rem] border border-[var(--border-default)] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.12),transparent_40%),var(--stack-panel)] p-4 xl:p-5">
       <div className="absolute inset-0 grid-overlay opacity-45" />
       <div className="relative z-10">
         <div className="mb-5 flex items-end justify-between gap-3">

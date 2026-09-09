@@ -231,7 +231,43 @@ textarea {
 
 @media (min-width: 768px) {
   .container-shell {
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+/* ≥1024: balanced gutters; soft max so content stays centered on large screens */
+@media (min-width: 1024px) {
+  .container-shell {
+    max-width: 100%;
+    padding-inline: 2.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-shell {
+    max-width: 1240px;
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-shell {
+    max-width: 1320px;
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container-shell {
+    max-width: 1400px;
+    padding-inline: 2.75rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container-shell {
+    max-width: 1520px;
+    padding-inline: 3rem;
   }
 }
 

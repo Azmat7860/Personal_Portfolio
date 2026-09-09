@@ -63,13 +63,13 @@ export default function HeroSection() {
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="container-shell relative z-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center lg:gap-10">
+      <div className="container-shell relative z-10 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:items-center lg:gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(340px,400px)] xl:gap-10 2xl:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] 2xl:gap-12">
         <motion.div
           variants={staggerContainer}
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView={shouldReduceMotion ? undefined : "visible"}
           viewport={{ once: true, amount: 0.35 }}
-          className="min-w-0 max-w-[40rem]"
+          className="min-w-0 w-full"
         >
           <motion.div
             variants={fadeInUp}
@@ -86,7 +86,7 @@ export default function HeroSection() {
             <p className="mb-3 font-mono text-sm uppercase tracking-[0.32em] text-[var(--text-muted)]">
               The Engineering Room
             </p>
-            <h1 className="max-w-full text-[clamp(2.1rem,9vw,4rem)] leading-none break-words">
+            <h1 className="max-w-full text-[clamp(1.9rem,8vw,2.5rem)] leading-none whitespace-normal md:whitespace-nowrap lg:text-[2.55rem] xl:text-[3.35rem] 2xl:text-[3.75rem]">
               <GradientText className="hero-name-shimmer">
                 Azmat Ullah Khan
               </GradientText>
@@ -121,7 +121,7 @@ export default function HeroSection() {
 
           <motion.p
             variants={fadeInUp}
-            className="mt-6 max-w-[34rem] text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
+            className="mt-6 max-w-[42rem] text-base leading-7 text-[var(--text-secondary)] sm:text-lg sm:leading-8"
           >
             {personal.intro}
           </motion.p>
@@ -174,7 +174,7 @@ export default function HeroSection() {
           whileInView={shouldReduceMotion ? undefined : { opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="justify-self-end"
+          className="hidden min-w-0 w-full lg:block"
         >
           <StackVisualization />
         </motion.div>
