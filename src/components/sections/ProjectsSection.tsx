@@ -95,7 +95,7 @@ export default function ProjectsSection() {
                     </div>
 
                     <div className="mt-6 flex flex-wrap gap-3">
-                      {project.tech.map((tech) => (
+                      {project.tech.slice(0, 10).map((tech) => (
                         <TechBadge key={tech} label={tech} />
                       ))}
                     </div>

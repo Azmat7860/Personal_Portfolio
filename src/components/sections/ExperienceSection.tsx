@@ -63,7 +63,7 @@ export default function ExperienceSection() {
                     ))}
                   </ul>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    {item.tech.map((tech) => (
+                    {item.tech.slice(0, 10).map((tech) => (
                       <TechBadge key={tech} label={tech} />
                     ))}
                   </div>

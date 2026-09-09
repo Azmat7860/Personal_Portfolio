@@ -20,14 +20,14 @@ const stackNodes = [
   },
   {
     label: "MongoDB / PostgreSQL",
-    tier: "Database",
+    tier: "Databases",
     code: "DB",
     icon: Database,
     accent: "from-emerald-400 to-cyan-400",
   },
   {
     label: "OpenAI / RAG / Agents",
-    tier: "AI Layer",
+    tier: "AI & Automation",
     code: "AI",
     icon: Sparkles,
     accent: "from-violet-500 to-fuchsia-500",

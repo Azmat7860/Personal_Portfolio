@@ -44,7 +44,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "MySQL", color: "#4479A1" },
       { name: "Supabase", color: "#3ECF8E" },
       { name: "TypeORM", color: "#EF4444" },
-      { name: "Mongoose", color: "#880000" },
+      { name: "Mongoose", color: "#A855F7" },
+      { name: "Prisma", color: "#F59E0B" },
     ],
   },
   {

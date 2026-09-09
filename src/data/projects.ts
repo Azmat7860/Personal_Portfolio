@@ -74,17 +74,16 @@ export const projects: Project[] = [
     challenge:
       "The product needed clear frontend architecture for role-specific dashboards, auth flows, and AI analytics that still felt usable.",
     solution:
-      "Built with Next.js, React, and TypeScript. Used Redux Toolkit for state, shadcn/ui and Recharts for UI and charts, and AWS Amplify Cognito for auth, MFA, and sessions.",
+      "Built with Next.js, React.js, and TypeScript. Used Redux Toolkit for state, Tailwind CSS and shadcn/ui for the UI, and AWS Amplify for auth, MFA, and sessions.",
     impact:
       "Made role-based dashboards and secure auth flows easier to use across different AI product workflows.",
     tech: [
       "Next.js",
-      "React",
+      "React.js",
       "TypeScript",
       "Redux Toolkit",
       "Tailwind CSS",
       "shadcn/ui",
-      "Recharts",
       "AWS Amplify",
     ],
     category: "frontend",
@@ -104,10 +103,17 @@ export const projects: Project[] = [
     challenge:
       "Admins needed a structured way to handle assessments, video review assignments, and consolidated evaluation exports.",
     solution:
-      "Built with React.js, Node.js, Express.js, and MongoDB. Used Redux for state and ExcelJS for multi-sheet evaluation reports.",
+      "Built with React.js, Node.js, Express.js, and MongoDB with Mongoose. Used Tailwind CSS for a clean, role-aware UI across Admins, Participants, and Raters.",
     impact:
-      "Made assessment workflows clearer and gave admins downloadable multi-sheet evaluation reports.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Redux", "ExcelJS"],
+      "Made assessment workflows clearer and gave admins a structured way to manage evaluations and feedback.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Tailwind CSS",
+    ],
     category: "fullstack",
     links: { caseStudy: "/projects#therapist-assessment-system" },
     featured: true,
@@ -125,16 +131,17 @@ export const projects: Project[] = [
     challenge:
       "The product needed reliable booking flows, vendor notifications, payments, and scalable support for multiple restaurants in one system.",
     solution:
-      "Built UI and backend functionality with NestJS, React.js, PostgreSQL, TypeORM, and Redux. Added real-time booking confirmations, vendor notifications, payment integration, REST APIs, and database operations for multi-vendor workflows.",
+      "Built the backend with Nest.js and Node.js on PostgreSQL and Prisma. Added JWT auth, Swagger-documented APIs, and RBAC for multi-vendor restaurant and booking workflows.",
     impact:
-      "Made restaurant discovery, booking, and vendor operations smoother with a more complete multi-vendor product flow.",
+      "Made restaurant discovery, booking, and vendor operations smoother with a more secure, documented multi-vendor API.",
     tech: [
-      "NestJS",
-      "React.js",
+      "Nest.js",
+      "Node.js",
       "PostgreSQL",
-      "TypeORM",
-      "Redux",
-      "Payment Gateway",
+      "Prisma",
+      "JWT",
+      "Swagger API",
+      "RBAC",
     ],
     category: "backend",
     links: { caseStudy: "/projects#halal-table" },
@@ -153,10 +160,18 @@ export const projects: Project[] = [
     challenge:
       "Users needed a clear way to search and browse thousands of locations and providers by category, region, and event type without a heavy booking flow getting in the way.",
     solution:
-      "Worked as a frontend developer on search, browsing, and marketplace UI for locations, providers, team events, and related event planning experiences.",
+      "Worked as a frontend developer on search, browsing, and marketplace UI using HTML5, CSS3, Bootstrap, JavaScript, jQuery, and Ajax, with Git for version control.",
     impact:
       "Helped shape a smoother discovery experience for planners exploring venues and services on the platform.",
-    tech: ["React.js", "JavaScript", "HTML5", "CSS3"],
+    tech: [
+      "HTML5",
+      "CSS3",
+      "Bootstrap",
+      "JavaScript",
+      "jQuery",
+      "Ajax",
+      "Git",
+    ],
     category: "frontend",
     links: {
       caseStudy: "/projects#eventbutler",
@@ -177,10 +192,18 @@ export const projects: Project[] = [
     challenge:
       "Sports groups needed a simple way to explore training camp options, submit travel requests, and start trip planning with a specialized agency.",
     solution:
-      "Worked on product features around trip discovery, inquiry flows, and customer-facing UI for a Danish sports travel experience.",
+      "Worked on trip discovery and inquiry flows with HTML5, CSS3, and JavaScript, using MySQL, Postman, Git, and Agile delivery for a Danish sports travel experience.",
     impact:
       "Supported a clearer path from searching training camps to requesting a trip quote.",
-    tech: ["React.js", "JavaScript", "Node.js", "MongoDB"],
+    tech: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "MySQL",
+      "Postman API",
+      "Agile",
+      "Git",
+    ],
     category: "fullstack",
     links: {
       caseStudy: "/projects#yaksport",
