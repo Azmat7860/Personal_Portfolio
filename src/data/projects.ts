@@ -83,7 +83,7 @@ export const projects: Project[] = [
       "TypeScript",
       "Redux Toolkit",
       "Tailwind CSS",
-      "shadcn/ui",
+      "Shadcn",
       "AWS Amplify",
     ],
     category: "frontend",
