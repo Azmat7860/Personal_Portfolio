@@ -1,3 +1,9 @@
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  label?: string;
+}
+
 export interface Project {
   id: string;
   number: string;
@@ -14,6 +20,8 @@ export interface Project {
     github?: string;
     caseStudy?: string;
   };
+  /** Real UI / product screenshots for private or public projects */
+  gallery?: ProjectImage[];
   featured: boolean;
   gradient: string;
   accentColor: string;

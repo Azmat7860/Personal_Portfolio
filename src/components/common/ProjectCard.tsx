@@ -2,7 +2,9 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Lightbulb, Target, TrendingUp } from "lucide-react";
+import { useState } from "react";
 import BrowserMockup from "@/components/common/BrowserMockup";
+import ProjectGallery from "@/components/common/ProjectGallery";
 import TechBadge from "@/components/common/TechBadge";
 import { useHasMounted } from "@/hooks/useHasMounted";
 import type { Project } from "@/types";
@@ -21,7 +23,6 @@ const linkLabels: Record<string, string> = {
 
 type ProjectCardProps = {
   project: Project;
-  /** Cap tech badges (home preview). Omit to show all. */
   techLimit?: number;
   showNumberInTagline?: boolean;
   enableHoverLift?: boolean;
@@ -42,6 +43,9 @@ export default function ProjectCard({
   const canAnimate = hasMounted && !shouldReduceMotion;
   const tech = techLimit ? project.tech.slice(0, techLimit) : project.tech;
   const Title = titleAs;
+  const gallery = project.gallery ?? [];
+  const hasGallery = gallery.length > 0;
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const links = Object.entries(project.links).filter(([key, href]) => {
     if (!href) return false;
@@ -147,7 +151,17 @@ export default function ProjectCard({
           ) : null}
         </div>
 
-        <BrowserMockup gradient={project.gradient} title={project.name} />
+        {hasGallery ? (
+          <ProjectGallery
+            images={gallery}
+            title={project.name}
+            gradient={project.gradient}
+            lightboxOpen={lightboxOpen}
+            onLightboxOpenChange={setLightboxOpen}
+          />
+        ) : (
+          <BrowserMockup gradient={project.gradient} title={project.name} />
+        )}
       </div>
     </motion.article>
   );

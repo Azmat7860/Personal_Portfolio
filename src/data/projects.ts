@@ -29,6 +29,78 @@ export const projects: Project[] = [
       live: "https://www.highgeardata.com/",
     },
     featured: true,
+    gallery: [
+      {
+        src: "/projects/highgear/01-sign-up.png",
+        alt: "HighGear dealer sign up",
+        label: "Sign up",
+      },
+      {
+        src: "/projects/highgear/02-sign-in.png",
+        alt: "HighGear sign in",
+        label: "Sign in",
+      },
+      {
+        src: "/projects/highgear/03-dashboard.png",
+        alt: "HighGear dealer pulse dashboard",
+        label: "Dashboard",
+      },
+      {
+        src: "/projects/highgear/04-portfolio-profitability.png",
+        alt: "HighGear portfolio profitability",
+        label: "Portfolio profitability",
+      },
+      {
+        src: "/projects/highgear/05-portfolio-composition.png",
+        alt: "HighGear portfolio composition",
+        label: "Portfolio composition",
+      },
+      {
+        src: "/projects/highgear/06-sales.png",
+        alt: "HighGear sales analytics",
+        label: "Sales",
+      },
+      {
+        src: "/projects/highgear/07-inventory.png",
+        alt: "HighGear inventory management",
+        label: "Inventory",
+      },
+      {
+        src: "/projects/highgear/08-collections.png",
+        alt: "HighGear collections overview",
+        label: "Collections",
+      },
+      {
+        src: "/projects/highgear/09-charge-off.png",
+        alt: "HighGear charge off analytics",
+        label: "Charge off",
+      },
+      {
+        src: "/projects/highgear/10-active-loans.png",
+        alt: "HighGear active loans table",
+        label: "Active loans",
+      },
+      {
+        src: "/projects/highgear/11-user-management.png",
+        alt: "HighGear admin user management",
+        label: "User management",
+      },
+      {
+        src: "/projects/highgear/12-audit-logs.png",
+        alt: "HighGear admin audit logs",
+        label: "Audit logs",
+      },
+      {
+        src: "/projects/highgear/13-borrowing-base.png",
+        alt: "HighGear borrowing base facility configuration",
+        label: "Borrowing base",
+      },
+      {
+        src: "/projects/highgear/14-billing-management.png",
+        alt: "HighGear billing management for dealers",
+        label: "Billing management",
+      },
+    ],
     gradient:
       "linear-gradient(135deg, rgba(0, 210, 255, 0.16), rgba(139, 92, 246, 0.12))",
     accentColor: "#00D2FF",
@@ -60,6 +132,38 @@ export const projects: Project[] = [
       live: "https://www.knowlyeducation.com/",
     },
     featured: true,
+    gallery: [
+      {
+        src: "/projects/knowly/parent-dashboard.png",
+        alt: "Knowly parent portal dashboard with compliance and students",
+        label: "Parent portal",
+      },
+      {
+        src: "/projects/knowly/knowly-kiosk-child.png",
+        alt: "Knowly kiosk child profile selection",
+        label: "Choose child",
+      },
+      {
+        src: "/projects/knowly/knowly-kiosk-home.png",
+        alt: "Knowly kiosk home with continue learning and subjects",
+        label: "Kiosk home",
+      },
+      {
+        src: "/projects/knowly/knowly-kiosk-my-learning.png",
+        alt: "Knowly kiosk my learning subject picker",
+        label: "My learning",
+      },
+      {
+        src: "/projects/knowly/knowly-kiosk-lesson.png",
+        alt: "Knowly kiosk lesson being built for the student",
+        label: "Lesson",
+      },
+      {
+        src: "/projects/knowly/knowly-kiosk-summit.png",
+        alt: "Knowly kiosk session complete summit screen",
+        label: "Session complete",
+      },
+    ],
     gradient:
       "linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(16, 185, 129, 0.12))",
     accentColor: "#F59E0B",
@@ -89,6 +193,48 @@ export const projects: Project[] = [
     category: "frontend",
     links: { caseStudy: "/projects#kalpa-ai" },
     featured: true,
+    gallery: [
+      {
+        src: "/projects/kalpa/01-sign-in.png",
+        alt: "Kalpa AI sign in screen",
+        label: "Sign in",
+      },
+      {
+        src: "/projects/kalpa/02-dashboard.png",
+        alt: "Kalpa AI trial overview dashboard",
+        label: "Dashboard",
+      },
+      {
+        src: "/projects/kalpa/03-trials.png",
+        alt: "Kalpa AI trials list",
+        label: "Trials",
+      },
+      {
+        src: "/projects/kalpa/04-sites.png",
+        alt: "Kalpa AI site subjects and CRF forms",
+        label: "Sites",
+      },
+      {
+        src: "/projects/kalpa/05-pending-forms.png",
+        alt: "Kalpa AI pending forms list",
+        label: "Pending forms",
+      },
+      {
+        src: "/projects/kalpa/06-users.png",
+        alt: "Kalpa AI users list",
+        label: "Users",
+      },
+      {
+        src: "/projects/kalpa/07-audit-logs.png",
+        alt: "Kalpa AI audit logs",
+        label: "Audit logs",
+      },
+      {
+        src: "/projects/kalpa/08-edc-channels.png",
+        alt: "Kalpa AI EDC channels",
+        label: "EDC channels",
+      },
+    ],
     gradient:
       "linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(0, 210, 255, 0.12))",
     accentColor: "#10B981",
@@ -178,6 +324,33 @@ export const projects: Project[] = [
       live: "https://www.eventbutler.com/de-de/",
     },
     featured: false,
+    gallery: [
+      {
+        src: "/projects/eventbutler/eventbutler-home.png",
+        alt: "EventButler homepage with venue search",
+        label: "Homepage",
+      },
+      {
+        src: "/projects/eventbutler/eventbutler-locations.png",
+        alt: "EventButler locations listing page",
+        label: "Locations",
+      },
+      {
+        src: "/projects/eventbutler/eventbutler-service-providers.png",
+        alt: "EventButler service providers listing",
+        label: "Service providers",
+      },
+      {
+        src: "/projects/eventbutler/eventbutler-team-events.png",
+        alt: "EventButler team events page",
+        label: "Team events",
+      },
+      {
+        src: "/projects/eventbutler/eventbutler-wedding.png",
+        alt: "EventButler wedding planning page",
+        label: "Wedding",
+      },
+    ],
     gradient:
       "linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(0, 210, 255, 0.12))",
     accentColor: "#8B5CF6",
@@ -210,6 +383,33 @@ export const projects: Project[] = [
       live: "https://yaksport.dk/",
     },
     featured: false,
+    gallery: [
+      {
+        src: "/projects/yaksport/yaksport-home.png",
+        alt: "YakSport training camp homepage",
+        label: "Homepage",
+      },
+      {
+        src: "/projects/yaksport/yaksport-hotels.png",
+        alt: "YakSport hotels listing",
+        label: "Hotels",
+      },
+      {
+        src: "/projects/yaksport/yaksport-blogs.png",
+        alt: "YakSport blogs listing",
+        label: "Blogs",
+      },
+      {
+        src: "/projects/yaksport/yaksport-papillon-belvil.png",
+        alt: "YakSport Papillon Belvil hotel detail page",
+        label: "Papillon Belvil",
+      },
+      {
+        src: "/projects/yaksport/yaksport-terms.png",
+        alt: "YakSport Titanic Deluxe Lara hotel detail page",
+        label: "Titanic Deluxe Lara",
+      },
+    ],
     gradient:
       "linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(59, 130, 246, 0.12))",
     accentColor: "#10B981",
