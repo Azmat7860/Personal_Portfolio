@@ -36,12 +36,13 @@ export const personal = {
     "Delivering secure full-stack applications",
   ],
   intro:
-    "Full Stack MERN Developer with 3+ years of experience building scalable, production-ready web applications. I work with MongoDB, Express.js, React.js, Node.js, TypeScript, Next.js, REST APIs, authentication, RBAC, and AI-powered features, with a focus on clean architecture, performance, and end-to-end delivery.",
+    "Full Stack Software Engineer with 3+ years of experience building scalable, production-ready web applications using MERN, TypeScript, Next.js, REST APIs, authentication, RBAC, and AI-powered solutions. Focused on clean architecture, performance, and reliable end-to-end delivery.",
   about: [
-    "I'm Azmat Ullah Khan, a Full Stack Software Engineer with 3+ years of experience building scalable, production-ready web applications. I'm proficient in MongoDB, Express.js, React.js, Node.js, TypeScript, Next.js, REST APIs, authentication, and RBAC, and I also ship AI-powered features with a focus on clean architecture, performance, and end-to-end delivery.",
-    "At Tech Crusades, I lead full-stack development of enterprise SaaS applications using Next.js, TypeScript, and Supabase. That covers application architecture, RBAC, KPI dashboards with Recharts and TanStack Table, reusable UI with shadcn/ui and Redux Toolkit, OpenAI-powered features, and CI/CD through GitHub Actions and Vercel.",
-    "Before that, at Mercury Sols, Earendel Technologies, and DanZee Tech, I built and maintained production MERN and NestJS applications. That work covered customer and vendor platforms, booking products, real-time features, JWT authentication, RBAC, and payment integrations.",
-  ],
+    "I'm Azmat Ullah Khan, a Full Stack Software Engineer with 3+ years of experience building scalable, production-ready web applications. I specialize in the MERN stack, TypeScript, Next.js, NestJS, REST APIs, authentication, and RBAC, with experience building AI-powered features and delivering solutions end to end.",
+    "I've worked on enterprise SaaS platforms, analytics dashboards, customer and vendor platforms, booking systems, payment integrations, and real-time features. My work spans application architecture, database design, responsive interfaces, secure APIs, authentication, authorization, and production deployments.",
+    "I focus on clean architecture, maintainable code, reusable components, performance, security, and thoughtful user experience. I enjoy solving complex problems across the stack, working closely with product requirements, and turning ideas into reliable, production-ready software.",
+    "I'm comfortable taking ownership of features from planning and implementation to testing, refinement, and deployment. I continuously explore modern development practices and AI technologies to build smarter, more efficient, and maintainable applications.",
+  ],      
   education: {
     degree: "Bachelor of Science in Computer Science",
     school: "Khawaja Fareed University of Engineering and Information Technology",

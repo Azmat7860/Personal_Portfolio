@@ -9,11 +9,10 @@ export const experience: Experience[] = [
     period: { start: "Apr 2025", end: "Present" },
     version: "v4.0.0",
     description:
-      "Lead full-stack development of enterprise SaaS applications using Next.js, TypeScript, and Supabase, covering architecture, RBAC, dashboards, AI features, and delivery.",
+      "Lead full-stack development of enterprise SaaS applications, working across architecture, RBAC, dashboards, AI-powered features, authentication, and production delivery.",
     achievements: [
-      "Lead full-stack development of enterprise SaaS applications using Next.js, TypeScript, and Supabase, working on application architecture, RBAC, and features from development to delivery.",
-      "Build dashboards, data visualizations, and reusable UI components using Recharts, TanStack Table, shadcn/ui, and Redux Toolkit, and integrate OpenAI APIs for AI-powered features.",
-      "Build secure authentication and authorization flows with session management, and manage CI/CD using GitHub Actions with deployments through Vercel.",
+      "Build KPI dashboards, data visualizations, and reusable UI components using Recharts, TanStack Table, shadcn/ui, and Redux Toolkit, with OpenAI integrations for AI-powered features.",
+      "Develop secure authentication and authorization flows with session management, and manage CI/CD through GitHub Actions and Vercel.",
     ],
     tech: [
       "Next.js",
@@ -22,7 +21,7 @@ export const experience: Experience[] = [
       "OpenAI",
       "Recharts",
       "TanStack Table",
-      "shadcn/ui",
+      "Shadcn",
       "Redux Toolkit",
       "GitHub Actions",
       "Vercel",
@@ -38,11 +37,10 @@ export const experience: Experience[] = [
     period: { start: "Jul 2023", end: "Mar 2025" },
     version: "v3.0.0",
     description:
-      "Built and maintained production web applications using the MERN stack and NestJS, including customer and vendor platforms with real-time features.",
+      "Built and maintained production web applications using the MERN stack and NestJS, working across customer and vendor platforms, business workflows, and real-time features.",
     achievements: [
-      "Built and maintained production web applications using the MERN stack and NestJS, including customer and vendor platforms with real-time features.",
-      "Developed REST APIs, JWT authentication, RBAC, and payment integrations using Node.js, NestJS, TypeORM, PostgreSQL, and MongoDB.",
-      "Built reusable and responsive components, followed DRY principles, tested features across browsers, and worked with Agile teams to deliver projects on time.",
+      "Develop REST APIs, JWT authentication, RBAC, and payment integrations using NestJS, TypeORM, PostgreSQL, and MongoDB.",
+      "Build reusable, responsive components, follow DRY principles, test features across browsers, and collaborate with Agile teams to deliver production-ready applications.",
     ],
     tech: [
       "React.js",

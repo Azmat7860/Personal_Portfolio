@@ -16,7 +16,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Next.js", color: "#64748B" },
       { name: "TypeScript", color: "#3178C6" },
       { name: "Redux Toolkit", color: "#764ABC" },
-      { name: "shadcn/ui", color: "#0EA5E9" },
+      { name: "Shadcn", color: "#0EA5E9" },
       { name: "Material UI", color: "#007FFF" },
     ],
   },
